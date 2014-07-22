@@ -103,6 +103,7 @@ var contractConstructor = function () {
     $('#startBuild').append($('<p>').text('Chose a Starting Phrase'))
     for (i = 0; i < startPhrases.length; i++) {
     $('#startBuild').append($('<p>').text(startPhrases[i]))
+    $('#startBuild')addClass('selector');
     }
 }
 
