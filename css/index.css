@@ -36,7 +36,7 @@ body {
         color-stop(0.51, #E4E4E4)
     );
     background-attachment:fixed;
-    font-family: sans-serif;
+    font-family: serif;
     font-size:12px;
     height:100%;
     margin:0px;
@@ -63,7 +63,7 @@ body {
 }
 
 h1 {
-    font-size:3.3em;
+    font-size:5vmax;
     font-weight:bold;
     margin:0px;
     overflow:visible;
@@ -121,17 +121,22 @@ div#logo{
 }
 
 #social{
-    margin: auto;
+
 }
 
 #connect{
     max-width: 100%;
     font-size: 2.5em;
-    position:relative;            
-    text-align:center;   
+    position:relative;
+    text-align:center;
     margin:auto; 
     color: black;
     margin-top: 10px;
+}
+
+div#fb{
+    margin:auto;
+    max-width: 60%;
 }
 
 #fb{
@@ -142,7 +147,6 @@ div#logo{
     border-radius: 18px;
     margin-top: 10px;
     background-color: #4a86ea;
-    display: inline-block;
 }
 
 #fb h1{
@@ -151,9 +155,7 @@ div#logo{
     text-align:center;
 }
 
-/*div#fb{
-    max-width: 90%;*/
-}
+
 
 #splashContract{
     max-width: 80%;
@@ -165,6 +167,7 @@ div#logo{
 #nofb{
     font-size: 1.2em;
     text-decoration: underline;
+    text-align: center;
 }
 
 #nofun{
@@ -184,8 +187,14 @@ div#legal{
     color: #4a86ea;
 }
 
-#title{
-
+#title.p{
+    max-width: 100%;
+    font-size: 2.5em;
+    position:relative;
+    text-align:center;
+    margin:auto; 
+    color: black;
+    margin-top: 10px;
 }
 
 #search{
