@@ -100,10 +100,11 @@ var contractConstructor = function () {
     console.log("build the contract");
     $('#startBuild').show();
 
-    $('#startBuild').append($('<p>').text('Chose a Starting Phrase'))
+    $('#startBuild').append($('<p>').text('Chose a Starting Phrase').addClass('question'))
+    // $('#startBuild').addClass('question');
+
     for (i = 0; i < startPhrases.length; i++) {
     $('#startBuild').append($('<p>').text(startPhrases[i]))
-
     }
 }
 
