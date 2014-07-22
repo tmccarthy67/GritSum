@@ -68,8 +68,43 @@ var who = [
 	}
 ];
 
+//initial state
+$('#logo').show();
+$('#social').show();
+$('#legal').show();
+$('#title').hide();
+$('#search').hide();
+$('#contractConstruction').hide();
+$('#startBuild').hide();
+$('#verbBuild').hide();
+$('#nounBuild').hide();
+$('#rewardBuild').hide();
+$('#timeBuild').hide();
+$('#verifyBuild').hide();
+$('#sendBuild').hide();
+$('#completedContract').hide();
 
+$('#fb').on("click", function() {
+// add facebook login functionallity here
+    $('#social').hide();
+    $('#title').show();
+//    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
+    $('#contractConstruction').show();
+    $('#legal').hide();
 
+    $('#title').append($('<p>').text('Challenge Creation'))
+    contractConstructor();
+})
 
-console.log(who[0].who + "challenges " + who[1].who);
-console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
+var contractConstructor = function () {
+    console.log("build the contract");
+    $('#startBuild').show();
+
+    $('#startBuild').append($('<p>').text('Chose a Starting Phrase'))
+    for (i = 0; i < startPhrases.length; i++) {
+    $('#startBuild').append($('<p>').text(startPhrases[i]))
+    }
+}
+
+// console.log(who[0].who + "challenges " + who[1].who);
+// console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
