@@ -84,7 +84,7 @@ $('#verifyBuild').hide();
 $('#sendBuild').hide();
 $('#completedContract').hide();
 
-$('#fb').on("click", function() {
+$('#fb').on('click', function() {
 // add facebook login functionallity here
     $('#social').hide();
     $('#title').show();
@@ -101,12 +101,31 @@ var contractConstructor = function () {
     $('#startBuild').show();
 
     $('#startBuild').append($('<p>').text('Chose a Starting Phrase').addClass('question'))
-    // $('#startBuild').addClass('question');
 
     for (i = 0; i < startPhrases.length; i++) {
-    $('#startBuild').append($('<p>').text(startPhrases[i]))
+        var startClass = "start" + i;
+        $('#startBuild').append($('<p>').text(startPhrases[i]).addClass(startClass))
     }
+
+    var attachHandler = function(i) {
+        var startClick = ".start" + i;
+        $(startClick).click(function () {
+            tempStart = startPhrases[i];
+            newContractArray.push(tempStart);
+            $('#startBuild').hide();
+            $('#verbBuild').show();
+            return newContractArray;
+        });
+    }
+
+    for (i = 0; i < startPhrases.length; i++) {
+        attachHandler(i);
+    }
+
 }
+
+
+
 
 // console.log(who[0].who + "challenges " + who[1].who);
 // console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
