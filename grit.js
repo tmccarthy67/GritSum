@@ -70,5 +70,6 @@ var who = [
 
 
 
+
 console.log(who[0].who + "challenges " + who[1].who);
 console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
