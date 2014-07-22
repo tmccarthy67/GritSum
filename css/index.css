@@ -120,6 +120,10 @@ div#logo{
     content: url(../img/logo.png);
 }
 
+#social{
+    margin: auto;
+}
+
 #connect{
     max-width: 100%;
     font-size: 2.5em;
@@ -138,6 +142,7 @@ div#logo{
     border-radius: 18px;
     margin-top: 10px;
     background-color: #4a86ea;
+    display: inline-block;
 }
 
 #fb h1{
@@ -146,8 +151,8 @@ div#logo{
     text-align:center;
 }
 
-div#fb{
-    max-width: 90%;
+/*div#fb{
+    max-width: 90%;*/
 }
 
 #splashContract{
