@@ -93,11 +93,10 @@ $('#fb').on('click', function() {
     $('#legal').hide();
 
     $('#title').append($('<p>').text('Challenge Creation'))
-    contractConstructor();
+    startConstructor();
 })
 
-var contractConstructor = function () {
-    console.log("build the contract");
+var startConstructor = function () {
     $('#startBuild').show();
 
     $('#startBuild').append($('<p>').text('Chose a Starting Phrase').addClass('question'))
@@ -114,7 +113,7 @@ var contractConstructor = function () {
             newContractArray.push(tempStart);
             $('#startBuild').hide();
             $('#verbBuild').show();
-            return newContractArray;
+            verbConstructor();
         });
     }
 
@@ -124,8 +123,70 @@ var contractConstructor = function () {
 
 }
 
+var verbConstructor = function () {
+    var verbText = newContractArray;
+    $('#verbBuild').append($('<p>').text(newContractArray).addClass('question'))
+
+    for (i = 0; i < startPhrases.length; i++) {
+        var verbClass = "verb" + i;
+        $('#verbBuild').append($('<p>').text(verbPhrases[i]).addClass(verbClass))
+    }
+
+    var attachHandlerVerb = function(i) {
+        var verbClick = ".verb" + i;
+        $(verbClick).click(function () {
+            tempVerb = verbPhrases[i];
+            newContractArray.push(tempVerb);
+            $('#verbBuild').hide();
+            $('#nounBuild').show();
+            console.log(newContractArray);
+            console.log(verbPhrases[i]);
+            nounConstructor(verbPhrases[i]);
+        });
+    }
+
+    for (i = 0; i < startPhrases.length; i++) {
+        attachHandlerVerb(i);
+    }
+
+}
+
+var nounConstructor = function (verb) {
+    var nounText = newContractArray;
+    $('#nounBuild').append($('<p>').text(newContractArray).addClass('question'))
+
+    for (i = 0; i < nounPhrases.length; i++) {
+        var nounClass = "noun" + i;
+        console.log(verb);
+        if (verb === nounPhrases[i].verb) {
+                $('#nounBuild').append($('<p>').text(nounPhrases[i].phrase).addClass(nounClass))
+            }
+    }
+
+    var attachHandlerNoun = function(i) {
+        var nounClick = ".verb" + i;
+        $(nounClick).click(function () {
+            tempNoun = nounPhrases[i].phrase;
+            newContractArray.push(tempNoun);
+            $('#nounBuild').hide();
+            $('#rewardBuild').show();
+            console.log(newContractArray);
+
+            return newContractArray;
+        });
+    }
+
+    for (i = 0; i < startPhrases.length; i++) {
+        attachHandlerNoun(i);
+    }
+
+}
 
 
 
+            var contract;
+            for (i=0;i<newContractArray.length;i++){
+                contract = contract + newContractArray[i];
+            }
 // console.log(who[0].who + "challenges " + who[1].who);
 // console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
