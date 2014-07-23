@@ -197,7 +197,7 @@ var nounConstructor = function (verb) {
 var rewardConstructor = function (reward) {
     // var rewardText = newContractArray;
     var output = buildContractFormat(newContractArray);
-    $('#rewardBuild').append($('<p>').text(output + "wins ").addClass('question'))
+    $('#rewardBuild').append($('<p>').text(output).addClass('question'))
 
     //  build in ability to have rewards match up with the type of challenge i.e. drinking challenges have drink rewards etc
     for (i = 0; i < rewardPhrases.length; i++) {
@@ -265,9 +265,9 @@ var verifyConstructor = function () {
     var output = buildContractFormat(newContractArray);
     $('#verifyBuild').append($('<p>').text(output).addClass('question'))
 
-        $('#verifyBuild').append($('<p>').text("Is the above contract CORRECT?").addClass())
+        $('#verifyBuild').append($('<p>').text("Is the above contract CORRECT?").addClass('fubar'))
     for (i = 0; i < verifyPhrases.length; i++) {
-        var verifyClass = "time" + i;
+        var verifyClass = "verify" + i;
         $('#verifyBuild').append($('<p>').text(verifyPhrases[i]).addClass(verifyClass))
     }
 
@@ -279,7 +279,7 @@ var verifyConstructor = function () {
             // newContract = newContract + tempTime;
 
             $('#verifyBuild').hide();
-            $('#verifyBuild').show();
+            $('#sendBuild').show();
 //            verifyConstructor();
 
             console.log(newContract);
@@ -294,7 +294,6 @@ var verifyConstructor = function () {
     }
 
 }
-
 
 var buildContractFormat = function (CA) {
             var output = "";
