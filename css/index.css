@@ -192,7 +192,7 @@ div#legal{
 }
 
 
-#title #varification{
+#title, #verification{
     max-width: 100%;
     font-size: 2.0em;
     position:relative;
@@ -202,7 +202,8 @@ div#legal{
     margin-top: 5px;
 }
 
-#title p{
+#title p, #verification p{
+    color:#088889;
     padding: 0;
     margin: 0 0 5px 0;
     font-size: 1.0em;
@@ -220,7 +221,7 @@ div#legal{
 
 .selector p{
     max-width: 100%;
-    font-size: 1.0em;
+    font-size: .6em;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -236,7 +237,7 @@ div#legal{
     position:relative;
     text-align:center;
     margin:auto; 
-    color: black;
+    color: #b12134;
     margin-top: 0px;
     text-decoration: none !important;
     border: 0;
