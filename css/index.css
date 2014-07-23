@@ -130,7 +130,7 @@ div#logo{
 
 #connect{
     max-width: 100%;
-    font-size: 2.5em;
+    font-size: 2.0em;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -192,14 +192,20 @@ div#legal{
 }
 
 
-#title{
+#title #varification{
     max-width: 100%;
-    font-size: 2.5em;
+    font-size: 2.0em;
     position:relative;
     text-align:center;
     margin:auto; 
     color: black;
     margin-top: 5px;
+}
+
+#title p{
+    padding: 0;
+    margin: 0 0 5px 0;
+    font-size: 1.0em;
 }
 
 #contractConstruction{
@@ -224,8 +230,9 @@ div#legal{
 }
 
 .selector p.question{
+    text-transform: uppercase;
     max-width: 100%;
-    font-size: 1.0em;
+    font-size: 0.8em;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -233,6 +240,12 @@ div#legal{
     margin-top: 0px;
     text-decoration: none !important;
     border: 0;
+}
+
+#startBuild.question{
+    font-size: 1.0em;
+    /*text-transform: uppercase;*/
+    padding-bottom: 10px;
 }
 
 #search{
