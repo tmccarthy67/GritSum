@@ -48,15 +48,15 @@ var nounPhrases = [
     }
 ]
 
-var userEnteredReward = "this reward " //enventually this will be an entry field
+var rewardPhrases = [
+"2 Panchero's Burritos from the loser " , "a free lunch from the loser ", "bragging rights"
+]
 
-var reward = userEnteredReward;
-
-var timeFrame = [
-	"immediately ", "24 hours ", "one week "
+var timePhrases = [
+	"immediately ", " within 24 hours ", "within one week "
 ];
 
-var who = [
+var whoPhrases = [
 	{
 		"who": "challenger ",
 		"challengesStarted": "challenges started ",
@@ -69,11 +69,18 @@ var who = [
 	}
 ];
 
+var verifyPhrases = [
+    "no", "yes"
+];
+
+        var inputContract;
+
 //initial state
 $('#logo').show();
 $('#social').show();
 $('#legal').show();
 $('#title').hide();
+$('#verification').hide();
 $('#search').hide();
 $('#contractConstruction').hide();
 $('#startBuild').hide();
@@ -127,8 +134,8 @@ var startConstructor = function () {
 }
 
 var verbConstructor = function () {
-    var verbText = newContractArray;
-    var output = newContractArray[0];
+    // var verbText = newContractArray;
+    var output = buildContractFormat(newContractArray);
     $('#verbBuild').append($('<p>').text(output).addClass('question'))
 
     for (i = 0; i < startPhrases.length; i++) {
@@ -156,8 +163,8 @@ var verbConstructor = function () {
 }
 
 var nounConstructor = function (verb) {
-    var nounText = newContractArray;
-    var output = newContractArray[0] + newContractArray[1]
+    // var nounText = newContractArray;
+    var output = buildContractFormat(newContractArray);
     $('#nounBuild').append($('<p>').text(output).addClass('question'))
 
     for (i = 0; i < nounPhrases.length; i++) {
@@ -171,14 +178,12 @@ var nounConstructor = function (verb) {
         var nounClick = ".noun" + i;
         $(nounClick).click(function () {
             tempNoun = nounPhrases[i].phrase;
-            newContractArray.push(tempNoun);
-            newContract = newContract + tempNoun;
-
-            console.log(newContract);
-            console.log(newContractArray);
+            newContractArray.push(tempNoun + "wins ");
+            newContract = newContract + tempNoun + "wins ";
 
             $('#nounBuild').hide();
             $('#rewardBuild').show();
+            rewardConstructor();
 
         });
     }
@@ -189,13 +194,115 @@ var nounConstructor = function (verb) {
 
 }
 
+var rewardConstructor = function (reward) {
+    // var rewardText = newContractArray;
+    var output = buildContractFormat(newContractArray);
+    $('#rewardBuild').append($('<p>').text(output + "wins ").addClass('question'))
+
+    //  build in ability to have rewards match up with the type of challenge i.e. drinking challenges have drink rewards etc
+    for (i = 0; i < rewardPhrases.length; i++) {
+        var rewardClass = "reward" + i;
+    //     if (verb === rewardPhrases[i].reward) {
+                $('#rewardBuild').append($('<p>').text(rewardPhrases[i]).addClass(rewardClass))
+    //         }
+    }
+
+    var attachHandlerNoun = function(i) {
+        var rewardClick = ".reward" + i;
+        $(rewardClick).click(function () {
+            tempReward = rewardPhrases[i];
+            newContractArray.push(tempReward);
+            newContract = newContract + tempReward;
+
+            $('#rewardBuild').hide();
+            $('#timeBuild').show();
+            timeConstructor();
+
+        });
+    }
+
+    for (i = 0; i < nounPhrases.length; i++) {
+        attachHandlerNoun(i);
+    }
+
+}
+
+var timeConstructor = function () {
+    // var timeText = newContractArray;
+    var output = buildContractFormat(newContractArray);
+    $('#timeBuild').append($('<p>').text(output).addClass('question'))
+
+    for (i = 0; i < timePhrases.length; i++) {
+        var timeClass = "time" + i;
+        $('#timeBuild').append($('<p>').text(timePhrases[i]).addClass(timeClass))
+    }
+
+    var attachHandlerTime = function(i) {
+        var timeClick = ".time" + i;
+        $(timeClick).click(function () {
+            tempTime = timePhrases[i];
+            newContractArray.push(tempTime);
+            newContract = newContract + tempTime;
+
+            $('#timeBuild').hide();
+            $('#title').hide();
+            $('#verification').show();
+            $('#verifyBuild').show();
+            verifyConstructor();
+
+        });
+    }
+
+    for (i = 0; i < startPhrases.length; i++) {
+        attachHandlerTime(i);
+    }
+
+}
+
+var verifyConstructor = function () {
+    $('#verification').append($('<p>').text("Contract Verification"));
+
+    var output = buildContractFormat(newContractArray);
+    $('#verifyBuild').append($('<p>').text(output).addClass('question'))
+
+        $('#verifyBuild').append($('<p>').text("Is the above contract CORRECT?").addClass())
+    for (i = 0; i < verifyPhrases.length; i++) {
+        var verifyClass = "time" + i;
+        $('#verifyBuild').append($('<p>').text(verifyPhrases[i]).addClass(verifyClass))
+    }
+
+    var attachHandlerVerify = function(i) {
+        var verifyClick = ".verify" + i;
+        $(verifyClick).click(function () {
+            tempVerify = verifyPhrases[i];
+            // newContractArray.push(tempTime);
+            // newContract = newContract + tempTime;
+
+            $('#verifyBuild').hide();
+            $('#verifyBuild').show();
+//            verifyConstructor();
+
+            console.log(newContract);
+            console.log(newContractArray);
+            // verifyConstructor();
+
+        });
+    }
+
+    for (i = 0; i < verifyPhrases.length; i++) {
+        attachHandlerVerify(i);
+    }
+
+}
 
 
-            var contract;
-            for (i=0;i<newContractArray.length;i++){
-                contract = contract + newContractArray[i];
+var buildContractFormat = function (CA) {
+            var output = "";
+            for (i=0;i<CA.length;i++){
+                output = output + CA[i];
             }
+            return output;
+}
 
-            console.log(contract);
 // console.log(who[0].who + "challenges " + who[1].who);
 // console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
