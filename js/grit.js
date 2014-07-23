@@ -1,4 +1,5 @@
 var newContractArray = new Array;
+var newContract = "";
 
 var nounPhrases = new Array;
 
@@ -111,6 +112,8 @@ var startConstructor = function () {
         $(startClick).click(function () {
             tempStart = startPhrases[i];
             newContractArray.push(tempStart);
+            newContract = newContract + tempStart
+
             $('#startBuild').hide();
             $('#verbBuild').show();
             verbConstructor();
@@ -125,7 +128,8 @@ var startConstructor = function () {
 
 var verbConstructor = function () {
     var verbText = newContractArray;
-    $('#verbBuild').append($('<p>').text(newContractArray).addClass('question'))
+    var output = newContractArray[0];
+    $('#verbBuild').append($('<p>').text(output).addClass('question'))
 
     for (i = 0; i < startPhrases.length; i++) {
         var verbClass = "verb" + i;
@@ -137,10 +141,10 @@ var verbConstructor = function () {
         $(verbClick).click(function () {
             tempVerb = verbPhrases[i];
             newContractArray.push(tempVerb);
+            newContract = newContract + tempVerb;
+
             $('#verbBuild').hide();
             $('#nounBuild').show();
-            console.log(newContractArray);
-            console.log(verbPhrases[i]);
             nounConstructor(verbPhrases[i]);
         });
     }
@@ -153,30 +157,33 @@ var verbConstructor = function () {
 
 var nounConstructor = function (verb) {
     var nounText = newContractArray;
-    $('#nounBuild').append($('<p>').text(newContractArray).addClass('question'))
+    var output = newContractArray[0] + newContractArray[1]
+    $('#nounBuild').append($('<p>').text(output).addClass('question'))
 
     for (i = 0; i < nounPhrases.length; i++) {
         var nounClass = "noun" + i;
-        console.log(verb);
         if (verb === nounPhrases[i].verb) {
                 $('#nounBuild').append($('<p>').text(nounPhrases[i].phrase).addClass(nounClass))
             }
     }
 
     var attachHandlerNoun = function(i) {
-        var nounClick = ".verb" + i;
+        var nounClick = ".noun" + i;
         $(nounClick).click(function () {
             tempNoun = nounPhrases[i].phrase;
             newContractArray.push(tempNoun);
-            $('#nounBuild').hide();
-            $('#rewardBuild').show();
+            newContract = newContract + tempNoun;
+
+            console.log(newContract);
             console.log(newContractArray);
 
-            return newContractArray;
+            $('#nounBuild').hide();
+            $('#rewardBuild').show();
+
         });
     }
 
-    for (i = 0; i < startPhrases.length; i++) {
+    for (i = 0; i < nounPhrases.length; i++) {
         attachHandlerNoun(i);
     }
 
@@ -188,5 +195,7 @@ var nounConstructor = function (verb) {
             for (i=0;i<newContractArray.length;i++){
                 contract = contract + newContractArray[i];
             }
+
+            console.log(contract);
 // console.log(who[0].who + "challenges " + who[1].who);
 // console.log(startPhrases[0] + nounPhrases[0].verb + nounPhrases[0].phrase + "wins " + reward + "to be paid " + timeFrame[0]);
