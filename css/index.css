@@ -132,7 +132,7 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-#master{
+#container{
     max-width: 600px;
     margin: auto;
 }
@@ -236,12 +236,13 @@ div#legal{
 
 #contractConstruction{
     max-width: 100%;
-    font-size: 2.0em;
+    font-size: 2.5em;
     position:relative;
     text-align:center;
     margin:auto; 
     color: black;
-    margin-top: 0px;
+    margin-top: 10px;
+    line-height: 0.9em;
 }
 
 .selector p{
@@ -258,7 +259,7 @@ div#legal{
 .selector p.question{
     text-transform: uppercase;
     max-width: 100%;
-    font-size: 0.8em;
+    font-size: 0.6em;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -282,6 +283,26 @@ div#legal{
 
 }
 
-#back{
+.footer{
+    position:absolute;
+    width: 100%;
+    margin: auto;
+    bottom: 5px;
+}
 
+div.back {
+    margin: auto;
+    width: 15%;
+}
+
+.back{
+    text-align: center;
+    position:relative;
+    bottom: 5px;             
+    margin:auto;
+    color: white;
+    border: 2px solid black;
+    border-radius: 18px;
+    margin-top: 5px;
+    background-color: #4a86ea;
 }
