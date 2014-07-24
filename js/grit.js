@@ -155,11 +155,11 @@ $('#contractConstruction').show();
 $('#legal').hide();
 
 $('#title').append($('<p>').text('Challenge Creation'))
-
     if (startPhrases.length ===  0) {
         GritRawPhrases(startGenerator);
     }
 });
+
 
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
@@ -190,7 +190,7 @@ var startConstructor = function (startPhrases) {
 
 }
 
-var verbConstructor = function () {
+var verbConstructor = function() {
     // var verbText = newContractArray;
     var output = buildContractFormat(newContractArray);
     $('#verbBuild').append($('<p>').text(output).addClass('question'))
@@ -202,7 +202,7 @@ var verbConstructor = function () {
 
     var attachHandlerVerb = function(i) {
         var verbClick = ".verb" + i;
-        $(verbClick).click(function () {
+        $(verbClick).click(function() {
             tempVerb = verbPhrases[i];
             newContractArray.push(tempVerb);
             newContract = newContract + tempVerb;
@@ -219,7 +219,7 @@ var verbConstructor = function () {
 
 }
 
-var nounConstructor = function (verb) {
+var nounConstructor = function(verb) {
     // var nounText = newContractArray;
     var output = buildContractFormat(newContractArray);
     $('#nounBuild').append($('<p>').text(output).addClass('question'))
@@ -233,7 +233,7 @@ var nounConstructor = function (verb) {
 
     var attachHandlerNoun = function(i) {
         var nounClick = ".noun" + i;
-        $(nounClick).click(function () {
+        $(nounClick).click(function() {
             tempNoun = nounPhrases[i].phrase;
             newContractArray.push(tempNoun + "wins ");
             newContract = newContract + tempNoun + "wins ";
@@ -251,7 +251,7 @@ var nounConstructor = function (verb) {
 
 }
 
-var rewardConstructor = function (reward) {
+var rewardConstructor = function(reward) {
     // var rewardText = newContractArray;
     var output = buildContractFormat(newContractArray);
     $('#rewardBuild').append($('<p>').text(output).addClass('question'))
@@ -284,7 +284,7 @@ for (i = 0; i < nounPhrases.length; i++) {
 
 }
 
-var timeConstructor = function () {
+var timeConstructor = function() {
     // var timeText = newContractArray;
     var output = buildContractFormat(newContractArray);
     $('#timeBuild').append($('<p>').text(output).addClass('question'))
@@ -296,7 +296,7 @@ var timeConstructor = function () {
 
     var attachHandlerTime = function(i) {
         var timeClick = ".time" + i;
-        $(timeClick).click(function () {
+        $(timeClick).click(function() {
             tempTime = timePhrases[i];
             newContractArray.push(tempTime);
             newContract = newContract + tempTime;
@@ -316,7 +316,7 @@ var timeConstructor = function () {
 
 }
 
-var verifyConstructor = function () {
+var verifyConstructor = function() {
     $('#verification').append($('<p>').text("Contract Verification"));
 
     var output = buildContractFormat(newContractArray);
@@ -330,14 +330,14 @@ var verifyConstructor = function () {
 
     var attachHandlerVerify = function(i) {
         var verifyClick = ".verify" + i;
-        $(verifyClick).click(function () {
+        $(verifyClick).click(function() {
             tempVerify = verifyPhrases[i];
             // newContractArray.push(tempTime);
             // newContract = newContract + tempTime;
 
             $('#verifyBuild').hide();
             $('#sendBuild').show();
-//            verifyConstructor();
+            //            verifyConstructor();
 
 console.log(newContract);
 console.log(newContractArray);
@@ -352,7 +352,8 @@ console.log(newContractArray);
 
 }
 
-var buildContractFormat = function (CA) {
+
+var buildContractFormat = function(CA) {
     var output = "";
     for (i = 0; i < CA.length; i++) {
         output = output + CA[i];
