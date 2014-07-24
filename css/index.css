@@ -243,6 +243,7 @@ div#legal{
     color: black;
     margin-top: 10px;
     line-height: 0.9em;
+    text-transform: uppercase;
 }
 
 .selector p{
@@ -291,11 +292,14 @@ div#legal{
 }
 
 div.back {
+    color: #b12134;
     margin: auto;
-    width: 15%;
+    width: 18%;
 }
 
 .back{
+    font-size: 1.5em;
+    font-weight: bold;
     text-align: center;
     position:relative;
     bottom: 5px;             
@@ -304,5 +308,5 @@ div.back {
     border: 2px solid black;
     border-radius: 18px;
     margin-top: 5px;
-    background-color: #4a86ea;
+    background-color: #c7c092;
 }
