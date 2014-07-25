@@ -221,7 +221,6 @@ var verbConstructor = function() {
 
 var quantConstructor = function() {
     GritRawPhrases(function() {
-        console.log(Object.keys(quantPhrases).length);
         var output = buildContractFormat(newContractArray);
         $('#quantBuild').append($('<p>').text(output).addClass('question'));
 
@@ -242,7 +241,8 @@ var quantConstructor = function() {
                 franchiseConstructor();
             });
         }
-
+// console.log(keyName);
+// console.log(quantPhrases);
         for (var keyName in quantPhrases) {
             attachHandlerQuant(keyName);
         }
@@ -257,12 +257,60 @@ var franchiseConstructor = function() {
 
         for (var keyName in franchisePhrases) {
 
-        console.log(verb);
-        console.log(franchisePhrases);
-        console.log(franchisePhrases[verb]);
-        console.log(keyName);
-        console.log(verb === keyName);
-            var franchiseClass = "franchise" + keyName;
+        // console.log(verb);
+        // console.log(franchisePhrases);
+        // console.log(franchisePhrases[verb]);
+        // console.log(keyName);
+        // console.log(verb === keyName);
+            if (verb === keyName) {
+                for (var nounKey in franchisePhrases[verb]) {
+                    console.log(nounKey);
+            var franchiseClass = "franchise" + nounKey;
+            $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
+                }
+
+            }
+
+        }
+
+        var attachHandlerFranchise = function(nounKey) {
+            var franchiseClick = ".franchise" + nounKey;
+            $(franchiseClick).click(function() {
+                tempFranchise = nounKey;
+                newContractArray.push(tempFranchise);
+                newContract = newContract + tempFranchise;
+
+                $('#franchiseBuild').hide();
+                $('#nounBuild').show();
+                nounConstructor();
+            });
+        }
+// console.log(verb);
+// console.log(keyName);
+// console.log(nounKey);
+// var test = franchisePhrases[verb];
+// console.log(test);
+// console.log(test[nounKey]);
+        for (var nounKey in franchisePhrases[verb]) {
+            attachHandlerFranchise(nounKey);
+        }
+    });
+}
+
+var nounConstructor = function(verb) {
+    GritRawPhrases(function() {
+        verb = (newContractArray[1]).trim();
+    var output = buildContractFormat(newContractArray);
+    $('#nounBuild').append($('<p>').text(output).addClass('question'))
+
+        for (var keyName in nounPhrases) {
+
+        // console.log(verb);
+        // console.log(franchisePhrases);
+        // console.log(franchisePhrases[verb]);
+        // console.log(keyName);
+        // console.log(verb === keyName);
+            var nounClass = "noun" + keyName;
             if (verb === keyName) {
                 for (var nounKey in franchisePhrases[verb]) {
                     console.log(nounKey);
@@ -273,44 +321,6 @@ var franchiseConstructor = function() {
 
         }
 
-    // for (var keyName in nounPhrases) {
-    //     var nounClass = "noun" + keyName;
-    //     if (verb === nounPhrases[keyName].verb) {
-    //         $('#nounBuild').append($('<p>').text(nounPhrases[keyName].phrase).addClass(nounClass))
-    //     }
-    // }
-
-        var attachHandlerFranchise = function(keyName) {
-            var franchiseClick = ".franchise" + keyName;
-            $(franchiseClick).click(function() {
-                tempFranchise = franchisePhrases[keyName];
-                newContractArray.push(tempFranchise);
-                newContract = newContract + tempFranchise;
-
-                $('#franchiseBuild').hide();
-                $('#nounBuild').show();
-                //franchiseConstructor();
-            });
-        }
-
-        for (var keyName in franchisePhrases) {
-            attachHandlerFranchise(keyName);
-        }
-    });
-}
-
-var nounConstructor = function(verb) {
-    GritRawPhrases(function() {
-        console.log(Object.keys(nounPhrases).length);
-    var output = buildContractFormat(newContractArray);
-    $('#nounBuild').append($('<p>').text(output).addClass('question'))
-
-    for (var keyName in nounPhrases) {
-        var nounClass = "noun" + keyName;
-        if (verb === nounPhrases[keyName].verb) {
-            $('#nounBuild').append($('<p>').text(nounPhrases[keyName].phrase).addClass(nounClass))
-        }
-    }
 
     var attachHandlerNoun = function(keyName) {
         var nounClick = ".noun" + keyName;
