@@ -264,7 +264,60 @@ var franchiseConstructor = function() {
         // console.log(verb === keyName);
             if (verb === keyName) {
                 for (var nounKey in franchisePhrases[verb]) {
-                    console.log(nounKey);
+                    var nounKeyClass = nounKey.replace(/\s/g, "");
+                    // console.log(nounKey);
+            var franchiseClass = "franchise" + nounKeyClass;
+            $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
+                }
+
+            }
+
+        }
+
+        var attachHandlerFranchise = function(nounKey) {
+            var nounKeyClass = nounKey.replace(/\s/g, "");
+            var franchiseClick = ".franchise" + nounKeyClass;
+            $(franchiseClick).click(function() {
+                tempFranchise = nounKey;
+                newContractArray.push(tempFranchise);
+                newContract = newContract + tempFranchise;
+
+                $('#franchiseBuild').hide();
+                $('#nounBuild').show();
+                nounConstructor(nounKey);
+            });
+        }
+// console.log(verb);
+// console.log(keyName);
+// console.log(nounKey);
+// var test = nounKey;
+// var test2 = nounKey.trim();
+// console.log(test === test2);
+// var test = franchisePhrases[verb];
+// console.log(test);
+// console.log(test[nounKey]);
+        for (var nounKey in franchisePhrases[verb]) {
+            attachHandlerFranchise(nounKey);
+        }
+    });
+}
+
+var nounConstructor = function(location) {
+    GritRawPhrases(function() {
+        verb = (newContractArray[1]).trim();
+        var output = buildContractFormat(newContractArray);
+        $('#nounBuild').append($('<p>').text(output).addClass('question'));
+
+        for (var keyName in franchisePhrases[verb]) {
+
+        // console.log(verb);
+        // console.log(franchisePhrases);
+        // console.log(franchisePhrases[verb]);
+        // console.log(keyName);
+        // console.log(location === keyName);
+            if (location === keyName) {
+                for (var nounKey in franchisePhrases[verb]) {
+                    // console.log(nounKey);
             var franchiseClass = "franchise" + nounKey;
             $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
@@ -282,7 +335,7 @@ var franchiseConstructor = function() {
 
                 $('#franchiseBuild').hide();
                 $('#nounBuild').show();
-                nounConstructor();
+                rewardConstructor();
             });
         }
 // console.log(verb);
@@ -295,51 +348,6 @@ var franchiseConstructor = function() {
             attachHandlerFranchise(nounKey);
         }
     });
-}
-
-var nounConstructor = function(verb) {
-    GritRawPhrases(function() {
-        verb = (newContractArray[1]).trim();
-    var output = buildContractFormat(newContractArray);
-    $('#nounBuild').append($('<p>').text(output).addClass('question'))
-
-        for (var keyName in nounPhrases) {
-
-        // console.log(verb);
-        // console.log(franchisePhrases);
-        // console.log(franchisePhrases[verb]);
-        // console.log(keyName);
-        // console.log(verb === keyName);
-            var nounClass = "noun" + keyName;
-            if (verb === keyName) {
-                for (var nounKey in franchisePhrases[verb]) {
-                    console.log(nounKey);
-            $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
-                }
-
-            }
-
-        }
-
-
-    var attachHandlerNoun = function(keyName) {
-        var nounClick = ".noun" + keyName;
-        $(nounClick).click(function() {
-            tempNoun = nounPhrases[keyName].phrase;
-            newContractArray.push(tempNoun + "wins ");
-            newContract = newContract + tempNoun + "wins ";
-
-            $('#nounBuild').hide();
-            $('#rewardBuild').show();
-            rewardConstructor();
-
-        });
-    }
-
-    for (var keyName in nounPhrases) {
-        attachHandlerNoun(keyName);
-    }
-  });
 }
 
 var rewardConstructor = function(reward) {
