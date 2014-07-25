@@ -37,7 +37,8 @@ body {
     );
     background-attachment:fixed;
     font-family: serif;
-    font-size:12px;
+    font-size:12px;/*fall back font size*/
+    font-size: 3vw;
     height:100%;
     margin:0px;
     padding:0px;
@@ -47,7 +48,7 @@ body {
     background-position: 98% 98%;*/
 }
 
-@media (max-width:2560px){
+@media (max-height:2600px){
     body{
     background-image:  url(../img/tallmonster1.png);
     background-repeat: no-repeat;
@@ -55,7 +56,7 @@ body {
     }
 }
 
-@media (max-width:1280px){
+@media (max-height:960px){
     body{
     background-image:  url(../img/tallmonsterxlrg.png);
     background-repeat: no-repeat;
@@ -63,17 +64,17 @@ body {
     }
 }
 
-@media (max-width:768px){
+@media (max-height:640px){
     body{
-    background-image:  url(../img/tallmonsterlrg.png);
+    background-image:  url(../img/tallmonstersm.png);
     background-repeat: no-repeat;
     background-position: 98% 98%;
     }
 }
 
-@media (max-width:360px){
+@media (max-height:480px){
     body{
-    background-image:  url(../img/tallmonstersm.png);
+    background-image:  url(../img/tallmonsterxsm.png);
     background-repeat: no-repeat;
     background-position: 98% 98%;
     }
@@ -116,6 +117,7 @@ h1 {
     -webkit-border-radius:4px;
     color:#FFFFFF;
     font-size:12px;
+    font-size: 3vw;
     margin:0px 30px;
     padding:2px 0px;
 }
@@ -170,7 +172,8 @@ div#logo{
 
 #connect{
     max-width: 100%;
-    font-size: 2.0em;
+    font-size: 24px;
+    font-size: 6vw;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -215,7 +218,8 @@ div#fb{
 }
 
 #nofun{
-    font-size: 1.0em;
+    font-size: 12px;
+    font-size: 3vw;
     color: red;
     text-align: center;
 
@@ -226,7 +230,8 @@ div#legal{
 }
 
 #legal{
-    font-size: 1.0em;
+    font-size: 12px;
+    font-size: 3vw;
     text-align: center;
     color: #4a86ea;
 }
@@ -234,7 +239,8 @@ div#legal{
 
 #title, #verification{
     max-width: 100%;
-    font-size: 2.0em;
+    font-size: 24px;
+    font-size: 6vw;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -251,19 +257,21 @@ div#legal{
 
 #contractConstruction{
     max-width: 100%;
-    font-size: 2.5em;
+    font-size: 24px;
+    font-size: 7vw;
     position:relative;
     text-align:center;
     margin:auto; 
     color: black;
     margin-top: 10px;
-    line-height: 0.9em;
+    line-height: 3vw;
     text-transform: uppercase;
 }
 
 .selector p{
     max-width: 100%;
-    font-size: .6em;
+    font-size: 12px;
+    font-size: 4vw;
     position:relative;
     text-align:center;
     margin:auto; 
@@ -275,7 +283,8 @@ div#legal{
 .selector p.question{
     text-transform: uppercase;
     max-width: 100%;
-    font-size: 0.6em;
+    font-size: 12px;
+    font-size: 3vw;
     position:relative;
     text-align:center;
     margin:auto; 
