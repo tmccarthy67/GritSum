@@ -91,9 +91,11 @@ var GritRawPhrases = function (f) {
 
         startPhrases = GritData.startPhrases;
         verbPhrases = GritData.verbPhrases;
-        nounPhrases = GritData.nounPhrases;
+        // nounPhrases = GritData.nounPhrases.franchise;
+        // console.log(nounPhrases);
         quantPhrases = GritData.nounPhrases.quantity;
         franchisePhrases = GritData.nounPhrases.franchise;
+        rewardPhrases = GritData.rewardPhrases;
         // console.log(franchisePhrases.drink);
         // console.log(franchisePhrases.eat);
         // console.log(franchisePhrases.physical);
@@ -284,7 +286,7 @@ var franchiseConstructor = function() {
 
                 $('#franchiseBuild').hide();
                 $('#nounBuild').show();
-                nounConstructor(nounKey);
+                nounConstructor();
             });
         }
 // console.log(verb);
@@ -302,55 +304,79 @@ var franchiseConstructor = function() {
     });
 }
 
-var nounConstructor = function(location) {
+
+var nounConstructor = function() {
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
+        var business = (newContractArray[3]);
+        var businessLocation = (business).trim();
         var output = buildContractFormat(newContractArray);
+        var nouns = franchisePhrases[verb];
+        // console.log(nouns);
+        // console.log(business);
+        // console.log(businessLocation);
+        var specificNouns = nouns[business];
+        // console.log(specificNouns);
         $('#nounBuild').append($('<p>').text(output).addClass('question'));
 
-        for (var keyName in franchisePhrases[verb]) {
+        for (var keyName in nouns) {
 
-        // console.log(verb);
-        // console.log(franchisePhrases);
-        // console.log(franchisePhrases[verb]);
         // console.log(keyName);
-        // console.log(location === keyName);
-            if (location === keyName) {
-                for (var nounKey in franchisePhrases[verb]) {
+        // console.log(businessLocation);
+        // console.log(business);
+        // console.log(franchisePhrases);
+        // console.log(verb);
+        // console.log(business === keyName);
+            if (business === keyName) {
+                for (var nounKey in specificNouns) {
+        // console.log(nounKey);
+        // console.log(specificNouns);
+        // console.log(franchisePhrases[verb]);
+        // console.log(business);
+        // console.log(businessLocation);
+                    var nounClass = "noun" + nounKey;
+                    // console.log(nounKeyClass);
                     // console.log(nounKey);
-            var franchiseClass = "franchise" + nounKey;
-            $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
+                    // console.log(specificNouns);
+                    // console.log(specificNouns[nounKey]);
+            $('#nounBuild').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
                 }
 
             }
-
         }
 
-        var attachHandlerFranchise = function(nounKey) {
-            var franchiseClick = ".franchise" + nounKey;
-            $(franchiseClick).click(function() {
-                tempFranchise = nounKey;
-                newContractArray.push(tempFranchise);
-                newContract = newContract + tempFranchise;
+        var attachHandlerNoun = function(nounKey) {
+            // console.log(nounKey);
+            var nounClick = ".noun" + nounKey;
+            // console.log(nounClick);
+            // console.log(nounClick === nounClass);
+            $(nounClick).click(function() {
+                // console.log(specificNouns);
+                tempNoun = specificNouns[nounKey];
+                // console.log(tempNoun);
+                newContractArray.push(tempNoun);
+                newContract = newContract + tempNoun;
 
-                $('#franchiseBuild').hide();
-                $('#nounBuild').show();
+                // console.log(newContract);
+                // console.log(newContractArray);
+
+                $('#nounBuild').hide();
+                $('#rewardBuild').show();
                 rewardConstructor();
             });
         }
-// console.log(verb);
-// console.log(keyName);
-// console.log(nounKey);
-// var test = franchisePhrases[verb];
-// console.log(test);
-// console.log(test[nounKey]);
-        for (var nounKey in franchisePhrases[verb]) {
-            attachHandlerFranchise(nounKey);
+// console.log(specificNouns);
+// console.log(specificNouns[nounKey]);
+        for (var nounKey in specificNouns) {
+console.log(nounKey);
+console.log(specificNouns);
+            attachHandlerNoun(nounKey);
         }
     });
 }
 
 var rewardConstructor = function(reward) {
+    console.log('done');
     // var rewardText = newContractArray;
     var output = buildContractFormat(newContractArray);
     $('#rewardBuild').append($('<p>').text(output).addClass('question'))
