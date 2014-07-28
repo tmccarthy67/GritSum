@@ -118,7 +118,6 @@ $('#fb').on('click', function() {
 
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
-    $('.back').show();
 
     $('#startBuild').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
 
@@ -136,6 +135,7 @@ var startConstructor = function (startPhrases) {
 
             $('#startBuild').hide();
             $('#verbBuild').show();
+            $('.back').show();
             verbConstructor();
         });
     }
@@ -157,6 +157,15 @@ var verbConstructor = function() {
         }
 
         var attachHandlerVerb = function(keyName) {
+            // $('.back').click(function() {
+            // $('.back').hide();
+            // $('#startBuild').show();
+            // $('#verbBuild').hide();
+            // // remove data
+            // })
+
+
+
             var verbClick = ".verb" + keyName;
             $(verbClick).click(function() {
                 tempVerb = verbPhrases[keyName];
@@ -356,8 +365,16 @@ var verifyConstructor = function() {
     }
 
     var attachHandlerVerify = function(i) {
+
         var verifyClick = ".verify" + i;
         $(verifyClick).click(function() {
+            if (verifyClick === ".verify0") {
+            $('#startBuild').show();
+            $('#verifyBuild').hide();
+            newContractArray = [];
+            newContract = "";
+            startConstructor(startPhrases);
+            }
             tempVerify = verifyPhrases[i];
 
             $('#verifyBuild').hide();
