@@ -7,7 +7,21 @@ var newContract = "";
 var nounPhrases = new Array;
 
 var GritData = new Array;
+var rootRef = new Firebase('https://gritsum.firebaseio.com/');
 var GritSumDataRaw = new Firebase('https://gritsum.firebaseio.com/phrases/');
+
+var auth = new FirebaseSimpleLogin(rootRef, function(error, user) {
+  if (error) {
+    // an error occurred while attempting login
+    console.log("Login Error:", error);
+  } else if (user) {
+    // user authenticated with Firebase
+    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+  } else {
+    console.log("noone logged in ");
+    // user is logged out
+  }
+});
 
 var startPhrases = [];
 
@@ -68,26 +82,30 @@ $('#timeBuild').hide();
 $('#verifyBuild').hide();
 $('#sendBuild').hide();
 $('#completedContract').hide();
+$('.back').hide();
 $('.footer').hide();
 
 $('#fb').on('click', function() {
-// add facebook login functionallity here
-$('#social').hide();
-$('#title').show();
-//    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
-$('#contractConstruction').show();
-$('#legal').hide();
+    // add facebook login functionallity here
 
-$('#title').append($('<p>').text('Challenge Creation'))
-    if (startPhrases.length ===  0) {
-        GritRawPhrases(startGenerator);
-    }
+    auth.login('facebook');
+
+    $('#social').hide();
+    $('#title').show();
+    //    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
+    $('#contractConstruction').show();
+    $('#legal').hide();
+
+    $('#title').append($('<p>').text('Challenge Creation'))
+        if (startPhrases.length ===  0) {
+            GritRawPhrases(startGenerator);
+        }
 });
 
 
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
-    $('.footer').show();
+    $('.back').show();
 
     $('#startBuild').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
 
@@ -282,7 +300,7 @@ var rewardConstructor = function() {
 }
 
 var timeConstructor = function() {
-    console.log('done');
+    // console.log('done');
     var output = buildContractFormat(newContractArray);
     $('#timeBuild').append($('<p>').text(output).addClass('question'))
 
