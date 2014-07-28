@@ -37,8 +37,8 @@ body {
     );
     background-attachment:fixed;
     font-family: serif;
-    font-size:12px;/*fall back font size*/
     font-size: 3vw;
+    font-size:12px;/*fall back font size*/
     height:100%;
     margin:0px;
     padding:0px;
@@ -47,74 +47,8 @@ body {
     background-repeat: no-repeat;
     background-size: auto 45%;
     background-position: 98% 98%;
-    /*background-image:  url(../img/tallmonsterxlrg.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;*/
 }
 
-/*@media (max-height:2600px){
-    body{
-    background-image:  url(../img/tallmonster900.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:1500px){
-    body{
-    background-image:  url(../img/tallmonster600.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:1400px){
-    body{
-    background-image:  url(../img/tallmonster500.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:1000px){
-    body{
-    background-image:  url(../img/tallmonster400.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:760px){
-    body{
-    background-image:  url(../img/tallmonster300.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:640px){
-    body{
-    background-image:  url(../img/tallmonster200.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:480px){
-    body{
-    background-image:  url(../img/tallmonster150.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}
-
-@media (max-height:400px){
-    body{
-    background-image:  url(../img/tallmonster100.png);
-    background-repeat: no-repeat;
-    background-position: 98% 98%;
-    }
-}*/
 /* Portrait layout (default) */
 .app {
     position:relative;             /* position in the center of the screen */
@@ -324,7 +258,6 @@ div#legal{
 
 #startBuild.question{
     font-size: 1.0em;
-    /*text-transform: uppercase;*/
     padding-bottom: 10px;
 }
 
@@ -336,35 +269,18 @@ div#legal{
 
 }
 
-/*.footer{
-    position:fixed;
-    width: 100%;
-    z-index: 99;
-    margin: auto;
-    top: 5px;
-}*/
-
 div.back {
+    position:fixed;
+    content: url(../img/back200.png);
+    background-repeat: no-repeat;
     color: #b12134;
-    /*margin: auto;*/
-    width: 18%;
+    z-index: 99;
+    width: 15%;
 }
 
 .back{
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
     position:fixed;
-    top: 5px;
-    left: 10px;
-    /*left: -10%;*/
-    z-index: 99;
-    width: 100%;         
-    /*margin:auto;*/
-    color: white;
-    border: 2px solid #088889;
-    border-radius: 18px;
-    margin-top: 5px;
-    background-color: #c7c092;
+    top: 2%;
+    left: 2%;
 }
 
