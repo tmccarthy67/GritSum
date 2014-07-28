@@ -16,6 +16,18 @@ var auth = new FirebaseSimpleLogin(rootRef, function(error, user) {
     console.log("Login Error:", error);
   } else if (user) {
     // user authenticated with Firebase
+
+    $('#social').hide();
+    $('#title').show();
+    //    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
+    $('#contractConstruction').show();
+    $('#legal').hide();
+
+    $('#title').append($('<p>').text('Challenge Creation'))
+        if (startPhrases.length ===  0) {
+            GritRawPhrases(startGenerator);
+        }
+
     console.log("User ID: " + user.uid + ", Provider: " + user.provider);
   } else {
     console.log("noone logged in ");
@@ -84,6 +96,7 @@ $('#sendBuild').hide();
 $('#completedContract').hide();
 $('.back').hide();
 $('.footer').hide();
+
 
 $('#fb').on('click', function() {
     // add facebook login functionallity here
@@ -300,7 +313,6 @@ var rewardConstructor = function() {
 }
 
 var timeConstructor = function() {
-    // console.log('done');
     var output = buildContractFormat(newContractArray);
     $('#timeBuild').append($('<p>').text(output).addClass('question'))
 
@@ -365,28 +377,6 @@ var verifyConstructor = function() {
 var sendConstructor = function() {
 
     $('#sendBuild').append($('<p>').text("Sending to Facebook").addClass('question'));
-
-//     var output = buildContractFormat(newContractArray);
-//     $('#sendBuild').append($('<p>').text(output).addClass('question'))
-
-//     for (i = 0; i < sendPhrases.length; i++) {
-//         var sendClass = "send" + i;
-//         $('#sendBuild').append($('<p>').text(sendPhrases[i]).addClass(sendClass))
-//     }
-
-//     var attachHandlerSend = function(i) {
-//         var sendClick = ".send" + i;
-//         $(sendClick).click(function() {
-//             tempSend = sendPhrases[i];
-
-//             $('#sendBuild').hide();
-
-//         });
-//     }
-
-//     for (i = 0; i < sendPhrases.length; i++) {
-//         attachHandlerSend(i);
-//     }
 
 }
 
