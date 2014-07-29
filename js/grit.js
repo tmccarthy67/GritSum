@@ -76,6 +76,8 @@ startConstructor(startPhrases);
 
   var inputContract;
 
+  var output;
+
 //initial state
 $('#logo').show();
 $('#social').show();
@@ -119,11 +121,13 @@ $('#fb').on('click', function() {
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
 
-    $('#startBuild').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
+    $('.startDiv').remove();
+    $('#startBuild').append($('<div>').addClass('startDiv'))
+    $('.startDiv').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
 
     for (var keyName in startPhrases) {
         var startClass = "start" + keyName;
-        $('#startBuild').append($('<p>').text(startPhrases[keyName]).addClass(startClass))
+        $('.startDiv').append($('<p>').text(startPhrases[keyName]).addClass(startClass))
     }
 
     var attachHandler = function(keyName) {
@@ -148,29 +152,32 @@ var startConstructor = function (startPhrases) {
 
 var verbConstructor = function() {
     GritRawPhrases(function() {
-        var output = buildContractFormat(newContractArray);
-        $('#verbBuild').append($('<p>').text(output).addClass('question'));
+        output = buildContractFormat(newContractArray);
+            $('.startDiv').remove();
+            $('.verbDiv').remove();
+        $('#verbBuild').append($('<div>').addClass('verbDiv'))
+        $('.verbDiv').append($('<p>').text(output).addClass('question'));
 
         for (var keyName in verbPhrases) {
             var verbClass = "verb" + keyName;
-            $('#verbBuild').append($('<p>').text(verbPhrases[keyName]).addClass(verbClass))
+            $('.verbDiv').append($('<p>').text(verbPhrases[keyName]).addClass(verbClass))
         }
 
         var attachHandlerVerb = function(keyName) {
-            // $('.back').click(function() {
-            // $('.back').hide();
-            // $('#startBuild').show();
-            // $('#verbBuild').hide();
-            // // remove data
-            // })
-
-
+            $('#verbBack').click(function() {
+                newContract = "";
+                newContractArray = [];
+            $('.back').hide();
+            $('#startBuild').show();
+            $('#verbBuild').hide();
+            startConstructor(startPhrases);
+            });
 
             var verbClick = ".verb" + keyName;
             $(verbClick).click(function() {
                 tempVerb = verbPhrases[keyName];
                 newContractArray.push(tempVerb);
-                newContract = newContract + tempVerb;
+                newContract = output + tempVerb;
 
                 $('#verbBuild').hide();
                 $('#quantBuild').show();
@@ -188,19 +195,30 @@ var verbConstructor = function() {
 var quantConstructor = function() {
     GritRawPhrases(function() {
         var output = buildContractFormat(newContractArray);
-        $('#quantBuild').append($('<p>').text(output).addClass('question'));
+            $('.verbDiv').remove();
+            $('.quantDiv').remove();
+        $('#quantBuild').append($('<div>').addClass('quantDiv'));
+        $('.quantDiv').append($('<p>').text(output).addClass('question'));
 
         for (var keyName in quantPhrases) {
             var quantClass = "quant" + keyName;
-            $('#quantBuild').append($('<p>').text(quantPhrases[keyName]).addClass(quantClass))
+            $('.quantDiv').append($('<p>').text(quantPhrases[keyName]).addClass(quantClass))
         }
 
         var attachHandlerQuant = function(keyName) {
             var quantClick = ".quant" + keyName;
+            $('#quantBack').click(function() {
+                newContractArray.splice(1,1);
+                output = buildContractFormat(newContractArray);
+            $('#verbBuild').show();
+            $('#quantBuild').hide();
+            verbConstructor();
+            });
+
             $(quantClick).click(function() {
                 tempQuant = quantPhrases[keyName];
                 newContractArray.push(tempQuant);
-                newContract = newContract + tempQuant;
+                newContract = output + tempQuant;
 
                 $('#quantBuild').hide();
                 $('#franchiseBuild').show();
@@ -217,7 +235,10 @@ var franchiseConstructor = function() {
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
         var output = buildContractFormat(newContractArray);
-        $('#franchiseBuild').append($('<p>').text(output).addClass('question'));
+        $('.quantDiv').remove();
+        $('.franchiseDiv').remove();
+        $('#franchiseBuild').append($('<div>').addClass('franchiseDiv'))
+        $('.franchiseDiv').append($('<p>').text(output).addClass('question'));
 
         for (var keyName in franchisePhrases) {
 
@@ -225,7 +246,7 @@ var franchiseConstructor = function() {
                 for (var nounKey in franchisePhrases[verb]) {
                     var nounKeyClass = nounKey.replace(/\s/g, "");
             var franchiseClass = "franchise" + nounKeyClass;
-            $('#franchiseBuild').append($('<p>').text(nounKey).addClass(franchiseClass))
+            $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
 
             }
@@ -235,10 +256,18 @@ var franchiseConstructor = function() {
         var attachHandlerFranchise = function(nounKey) {
             var nounKeyClass = nounKey.replace(/\s/g, "");
             var franchiseClick = ".franchise" + nounKeyClass;
+            $('#franchiseBack').click(function() {
+                newContractArray.splice(2,1);
+                output = buildContractFormat(newContractArray);
+            $('#quantBuild').show();
+            $('#franchiseBuild').hide();
+            quantConstructor();
+            })
+
             $(franchiseClick).click(function() {
                 tempFranchise = nounKey;
                 newContractArray.push(tempFranchise);
-                newContract = newContract + tempFranchise;
+                newContract = output + tempFranchise;
 
                 $('#franchiseBuild').hide();
                 $('#nounBuild').show();
@@ -261,7 +290,10 @@ var nounConstructor = function() {
         var output = buildContractFormat(newContractArray);
         var nouns = franchisePhrases[verb];
         var specificNouns = nouns[business];
-        $('#nounBuild').append($('<p>').text(output).addClass('question'));
+        $('.nounDiv').remove();
+        $('.franchiseDiv').remove();
+        $('#nounBuild').append($('<div>').addClass('nounDiv'))
+        $('.nounDiv').append($('<p>').text(output).addClass('question'));
 
         for (var keyName in nouns) {
 
@@ -269,7 +301,7 @@ var nounConstructor = function() {
                 for (var nounKey in specificNouns) {
                     var nounClass = "noun" + nounKey;
 
-            $('#nounBuild').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
+            $('.nounDiv').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
                 }
 
             }
@@ -278,9 +310,18 @@ var nounConstructor = function() {
         var attachHandlerNoun = function(nounKey) {
             var nounClick = ".noun" + nounKey;
             $(nounClick).click(function() {
+            $('#nounBack').click(function() {//** not working **
+                console.log('here');
+                newContractArray.splice(3,1);
+                output = buildContractFormat(newContractArray);
+            $('#franchiseBuild').show();
+            $('#nounBuild').hide();
+            franchiseConstructor();
+            })
+
                 tempNoun = specificNouns[nounKey];
                 newContractArray.push(tempNoun);
-                newContract = newContract + tempNoun;
+                newContract = output + tempNoun;
 
                 $('#nounBuild').hide();
                 $('#rewardBuild').show();
@@ -295,15 +336,25 @@ var nounConstructor = function() {
 
 var rewardConstructor = function() {
     var output = buildContractFormat(newContractArray);
-    $('#rewardBuild').append($('<p>').text(output).addClass('question'))
+        $('.nounDiv').remove();
+        $('.rewardDiv').remove();
+        $('#rewardBuild').append($('<div>').addClass('rewardDiv'))
+        $('.rewardDiv').append($('<p>').text(output).addClass('question'))
     for (var keyName in rewardPhrases.combined) {
         var rewardClass = "reward" + keyName;
-        $('#rewardBuild').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
+        $('.rewardDiv').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
     }
 
         var attachHandlerReward = function(keyName) {
             var rewardClick = ".reward" + keyName;
             $(rewardClick).click(function () {
+            $('#rewardBack').click(function () {
+                newContractArray.splice(4,1);
+                output = buildContractFormat(newContractArray);
+            $('#nounBuild').show();
+            $('#rewardBuild').hide();
+            nounConstructor();
+            })
                 tempReward = rewardPhrases.combined[keyName];
                 newContractArray.push(tempReward);
                 newContract = newContract + tempReward;
@@ -323,16 +374,26 @@ var rewardConstructor = function() {
 
 var timeConstructor = function() {
     var output = buildContractFormat(newContractArray);
-    $('#timeBuild').append($('<p>').text(output).addClass('question'))
+    $('.timeDiv').remove();
+    $('.rewardDiv').remove();
+    $('#timeBuild').append($('<div>').addClass('timeDiv'));
+    $('.timeDiv').append($('<p>').text(output).addClass('question'))
 
     for (var keyName in timePhrases) {
         var timeClass = "time" + keyName;
-        $('#timeBuild').append($('<p>').text(timePhrases[keyName]).addClass(timeClass))
+        $('.timeDiv').append($('<p>').text(timePhrases[keyName]).addClass(timeClass))
     }
 
     var attachHandlerTime = function(keyName) {
         var timeClick = ".time" + keyName;
         $(timeClick).click(function() {
+        $('#timeBack').click(function() {
+                newContractArray.splice(5,1);
+                output = buildContractFormat(newContractArray);
+            $('#rewardBuild').show();
+            $('#timeBuild').hide();
+            rewardConstructor();
+        })
             tempTime = timePhrases[keyName];
             newContractArray.push(tempTime);
             newContract = newContract + tempTime;
