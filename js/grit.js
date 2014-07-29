@@ -99,6 +99,16 @@ $('#completedContract').hide();
 $('.back').hide();
 $('.footer').hide();
 
+//
+    $('.startDiv').remove();
+    $('.verbDiv').remove();
+    $('.quantDiv').remove();
+    $('.franchiseDiv').remove();
+    $('.nounDiv').remove();
+    $('.timeDiv').remove();
+    $('.rewardDiv').remove();
+    $('.verifyDiv').remove();
+    $('.sendDiv').remove();
 
 $('#fb').on('click', function() {
     // add facebook login functionallity here
@@ -137,6 +147,7 @@ var startConstructor = function (startPhrases) {
             newContractArray.push(tempStart);
             newContract = newContract + tempStart
 
+            $('.startDiv').remove();
             $('#startBuild').hide();
             $('#verbBuild').show();
             $('.back').show();
@@ -167,6 +178,11 @@ var verbConstructor = function() {
             $('#verbBack').click(function() {
                 newContract = "";
                 newContractArray = [];
+
+            $('.startDiv').remove();
+            $('.verbDiv').remove();
+            $('.quantDiv').remove();
+
             $('.back').hide();
             $('#startBuild').show();
             $('#verbBuild').hide();
@@ -208,6 +224,11 @@ var quantConstructor = function() {
         var attachHandlerQuant = function(keyName) {
             var quantClick = ".quant" + keyName;
             $('#quantBack').click(function() {
+
+            $('.verbDiv').remove();
+            $('.quantDiv').remove();
+            $('.franchiseDiv').remove();
+
                 newContractArray.splice(1,1);
                 output = buildContractFormat(newContractArray);
             $('#verbBuild').show();
@@ -257,6 +278,11 @@ var franchiseConstructor = function() {
             var nounKeyClass = nounKey.replace(/\s/g, "");
             var franchiseClick = ".franchise" + nounKeyClass;
             $('#franchiseBack').click(function() {
+
+            $('.quantDiv').remove();
+            $('.franchiseDiv').remove();
+            $('.nounDiv').remove();
+
                 newContractArray.splice(2,1);
                 output = buildContractFormat(newContractArray);
             $('#quantBuild').show();
@@ -310,8 +336,12 @@ var nounConstructor = function() {
         var attachHandlerNoun = function(nounKey) {
             var nounClick = ".noun" + nounKey;
             $(nounClick).click(function() {
-            $('#nounBack').click(function() {//** not working **
-                console.log('here');
+            $('#nounBack').click(function() {//** not working first time through**
+
+            $('.franchiseDiv').remove();
+            $('.nounDiv').remove();
+            $('.rewardDiv').remove();
+
                 newContractArray.splice(3,1);
                 output = buildContractFormat(newContractArray);
             $('#franchiseBuild').show();
@@ -348,7 +378,12 @@ var rewardConstructor = function() {
         var attachHandlerReward = function(keyName) {
             var rewardClick = ".reward" + keyName;
             $(rewardClick).click(function () {
-            $('#rewardBack').click(function () {
+            $('#rewardBack').click(function () {//** not working first time through**
+
+            $('.nounDiv').remove();
+            $('.rewardDiv').remove();
+            $('.timeDiv').remove();
+
                 newContractArray.splice(4,1);
                 output = buildContractFormat(newContractArray);
             $('#nounBuild').show();
@@ -387,7 +422,12 @@ var timeConstructor = function() {
     var attachHandlerTime = function(keyName) {
         var timeClick = ".time" + keyName;
         $(timeClick).click(function() {
-        $('#timeBack').click(function() {
+        $('#timeBack').click(function() {//** not working first time through**
+
+            $('.rewardDiv').remove();
+            $('.timeDiv').remove();
+            $('.verifyDiv').remove();
+
                 newContractArray.splice(5,1);
                 output = buildContractFormat(newContractArray);
             $('#rewardBuild').show();
@@ -414,35 +454,51 @@ var timeConstructor = function() {
 }
 
 var verifyConstructor = function() {
-    $('#verification').append($('<p>').text("Contract Verification"));
+    $('.verificationTextDiv').remove();
+    $('#verification').append($('<div>').addClass('verificationTextDiv'))
+    $('.verificationTextDiv').append($('<p>').text("Contract Verification"));
 
     var output = buildContractFormat(newContractArray);
-    $('#verifyBuild').append($('<p>').text(output).addClass('question'))
+    $('.verifyDiv').remove();
+    $('#verifyBuild').append($('<div>').addClass('verifyDiv'))
+    $('.verifyDiv').append($('<p>').text(output).addClass('question'))
 
-    $('#verifyBuild').append($('<p>').text("Is the above contract CORRECT?").addClass('fubar'))
+    $('.verifyDiv').append($('<p>').text("Is the above contract CORRECT?").addClass('fubar'))
     for (i = 0; i < verifyPhrases.length; i++) {
         var verifyClass = "verify" + i;
-        $('#verifyBuild').append($('<p>').text(verifyPhrases[i]).addClass(verifyClass))
+        $('.verifyDiv').append($('<p>').text(verifyPhrases[i]).addClass(verifyClass))
     }
 
     var attachHandlerVerify = function(i) {
 
         var verifyClick = ".verify" + i;
         $(verifyClick).click(function() {
+        $(verifyBack).click(function() {//** not working first time through**
+
+            $('.timeDiv').remove();
+            $('.verifyDiv').remove();
+            $('.sendDiv').remove();
+
+                newContractArray.splice(6,1);
+                output = buildContractFormat(newContractArray);
+            $('#timeBuild').show();
+            $('#verifyBuild').hide();
+            timeConstructor();
+        })
             if (verifyClick === ".verify0") {
             $('#startBuild').show();
             $('#verifyBuild').hide();
             newContractArray = [];
             newContract = "";
             startConstructor(startPhrases);
-            }
+            } else {
             tempVerify = verifyPhrases[i];
 
             $('#verifyBuild').hide();
             $('#verification').hide();
             $('#sendBuild').show();
             sendConstructor();
-
+            };
         });
     }
 
@@ -454,7 +510,9 @@ var verifyConstructor = function() {
 
 var sendConstructor = function() {
 
-    $('#sendBuild').append($('<p>').text("Sending to Facebook").addClass('question'));
+    $('.sendDiv').remove();
+    $('#sendBuild').append($('<div>').addClass('sendDiv'));
+    $('.sendDiv').append($('<p>').text("Sending to Facebook").addClass('question'));
 
 }
 
