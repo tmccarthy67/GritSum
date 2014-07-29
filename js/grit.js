@@ -132,7 +132,8 @@ $('#fb').on('click', function() {
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
 
-    $('.startDiv').remove();
+        clearDivs();
+
     $('#startBuild').append($('<div>').addClass('startDiv'))
     $('.startDiv').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
 
@@ -148,7 +149,7 @@ var startConstructor = function (startPhrases) {
             newContractArray.push(tempStart);
             newContract = newContract + tempStart
 
-            $('.startDiv').remove();
+            clearDivs();
             $('#startBuild').hide();
             $('#verbBuild').show();
             $('.back').show();
@@ -164,8 +165,7 @@ var startConstructor = function (startPhrases) {
 var verbConstructor = function() {
     GritRawPhrases(function() {
         output = buildContractFormat(newContractArray);
-        $('.startDiv').remove();
-        $('.verbDiv').remove();
+        clearDivs();
         $('#verbBuild').append($('<div>').addClass('verbDiv'))
         $('.verbDiv').append($('<p>').text(output).addClass('question'));
 
@@ -179,9 +179,7 @@ var verbConstructor = function() {
                 newContract = "";
                 newContractArray = [];
 
-                $('.startDiv').remove();
-                $('.verbDiv').remove();
-                $('.quantDiv').remove();
+                clearDivs();
 
                 $('.back').hide();
                 $('#startBuild').show();
@@ -210,8 +208,7 @@ var verbConstructor = function() {
 var quantConstructor = function() {
     GritRawPhrases(function() {
         var output = buildContractFormat(newContractArray);
-        $('.verbDiv').remove();
-        $('.quantDiv').remove();
+        clearDivs();
         $('#quantBuild').append($('<div>').addClass('quantDiv'));
         $('.quantDiv').append($('<p>').text(output).addClass('question'));
 
@@ -224,10 +221,7 @@ var quantConstructor = function() {
             var quantClick = ".quant" + keyName;
             $('#quantBack').click(function() {
 
-                $('.verbDiv').remove();
-                $('.quantDiv').remove();
-                $('.franchiseDiv').remove();
-
+                clearDivs();
                 newContractArray.splice(1,1);
                 output = buildContractFormat(newContractArray);
                 $('#verbBuild').show();
@@ -255,8 +249,7 @@ var franchiseConstructor = function() {
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
         var output = buildContractFormat(newContractArray);
-        $('.quantDiv').remove();
-        $('.franchiseDiv').remove();
+        clearDivs();
         $('#franchiseBuild').append($('<div>').addClass('franchiseDiv'))
         $('.franchiseDiv').append($('<p>').text(output).addClass('question'));
 
@@ -269,9 +262,7 @@ var franchiseConstructor = function() {
                         newContractArray.push(tempFranchise);
                         newContract = output + tempFranchise;
 
-                        $('.quantDiv').remove();
-                        $('.franchiseDiv').remove();
-                        $('.nounDiv').remove();
+                        clearDivs();
 
                         $('#franchiseBuild').hide();
                         $('#nounBuild').show();
@@ -290,9 +281,7 @@ var franchiseConstructor = function() {
             var franchiseClick = ".franchise" + nounKeyClass;
             $('#franchiseBack').click(function() {
 
-                $('.quantDiv').remove();
-                $('.franchiseDiv').remove();
-                $('.nounDiv').remove();
+                clearDivs();
 
                 newContractArray.splice(2,1);
                 output = buildContractFormat(newContractArray);
@@ -326,9 +315,7 @@ var nounConstructor = function() {
         var output = buildContractFormat(newContractArray);
         var nouns = franchisePhrases[verb];
         var specificNouns = nouns[business];
-        $('.franchiseDiv').remove();
-        $('.nounDiv').remove();
-        $('.rewardDiv').remove();
+        clearDivs();
 
         $('#nounBuild').append($('<div>').addClass('nounDiv'))
         $('.nounDiv').append($('<p>').text(output).addClass('question'));
@@ -362,10 +349,7 @@ var nounConstructor = function() {
                 // newContract = "";
                 // newContractArray = [];
 
-                $('.quantDiv').remove();
-                $('.franchiseDiv').remove();
-                $('.nounDiv').remove();
-                $('.rewardDiv').remove();
+                clearDivs();
 
                 $('#quantBuild').show();
                 $('#nounBuild').hide();
@@ -394,11 +378,7 @@ var nounConstructor = function() {
             $('#nounBack').click(function() {
                 // newContract = "";
                 // newContractArray = [];
-
-                $('.franchiseDiv').remove();
-                $('.nounDiv').remove();
-                $('.rewardDiv').remove();
-
+                clearDivs();
                 $('#franchiseBuild').show();
                 $('#nounBuild').hide();
                 newContractArray.splice(3,1);
@@ -426,8 +406,7 @@ var nounConstructor = function() {
 
 var rewardConstructor = function() {
     var output = buildContractFormat(newContractArray);
-    $('.nounDiv').remove();
-    $('.rewardDiv').remove();
+        clearDivs();
     $('#rewardBuild').append($('<div>').addClass('rewardDiv'))
     $('.rewardDiv').append($('<p>').text(output).addClass('question'))
     for (var keyName in rewardPhrases.combined) {
@@ -451,9 +430,7 @@ var rewardConstructor = function() {
     }
 
     $('#rewardBack').click(function () {
-        $('.nounDiv').remove();
-        $('.rewardDiv').remove();
-        $('.timeDiv').remove();
+        clearDivs();
 
         newContractArray.splice(4,1);
         output = buildContractFormat(newContractArray);
@@ -469,8 +446,7 @@ var rewardConstructor = function() {
 
 var timeConstructor = function() {
     var output = buildContractFormat(newContractArray);
-    $('.timeDiv').remove();
-    $('.rewardDiv').remove();
+    clearDivs();
     $('#timeBuild').append($('<div>').addClass('timeDiv'));
     $('.timeDiv').append($('<p>').text(output).addClass('question'))
 
@@ -494,9 +470,7 @@ var timeConstructor = function() {
         verifyConstructor();
     });
         $('#timeBack').click(function() {
-            $('.rewardDiv').remove();
-            $('.timeDiv').remove();
-            $('.verifyDiv').remove();
+            clearDivs();
 
             newContractArray.splice(5,1);
             output = buildContractFormat(newContractArray);
@@ -517,7 +491,7 @@ var verifyConstructor = function() {
     $('.verificationTextDiv').append($('<p>').text("Contract Verification"));
 
     var output = buildContractFormat(newContractArray);
-    $('.verifyDiv').remove();
+            clearDivs();
     $('#verifyBuild').append($('<div>').addClass('verifyDiv'))
     $('.verifyDiv').append($('<p>').text(output).addClass('question'))
 
@@ -547,10 +521,7 @@ var verifyConstructor = function() {
         };
     });
         $(verifyBack).click(function() {
-            $('.timeDiv').remove();
-            $('.verifyDiv').remove();
-            $('.sendDiv').remove();
-
+                clearDivs();
             newContractArray.splice(6,1);
             output = buildContractFormat(newContractArray);
             $('#timeBuild').show();
@@ -566,7 +537,7 @@ var verifyConstructor = function() {
 
 var sendConstructor = function() {
 
-    $('.sendDiv').remove();
+    clearDivs();
     $('#sendBuild').append($('<div>').addClass('sendDiv'));
     $('.sendDiv').append($('<p>').text("Sending to Facebook").addClass('question'));
 }
@@ -578,3 +549,16 @@ var buildContractFormat = function(CA) {
     }
     return output;
 }
+
+var clearDivs = function () {
+    $('.startDiv').remove();
+    $('.verbDiv').remove();
+    $('.quantDiv').remove();
+    $('.franchiseDiv').remove();
+    $('.nounDiv').remove();
+    $('.timeDiv').remove();
+    $('.rewardDiv').remove();
+    $('.verifyDiv').remove();
+    $('.sendDiv').remove();
+    return;
+};
