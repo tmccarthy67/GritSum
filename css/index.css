@@ -233,11 +233,11 @@ div#legal{
 .selector p{
     max-width: 100%;
     font-size: 12px;
-    font-size: 4vw;
+    font-size: 4.4vw;
     position:relative;
     text-align:center;
     margin:auto; 
-    color: blue;
+    color: #088889;
     margin-top: 5px;
     text-decoration: underline;
 }
