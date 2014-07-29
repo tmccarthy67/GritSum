@@ -2,7 +2,7 @@
 // Hey Clay - BlackBox stuff below here - please ignore
 // ******
 var newContractArray = new Array;
-var newContract = "";
+var newContract;
 
 var nounPhrases = new Array;
 
@@ -14,7 +14,7 @@ var auth = new FirebaseSimpleLogin(rootRef, function(error, user) {
   if (error) {
     // an error occurred while attempting login
     console.log("Login Error:", error);
-  } else if (user) {
+} else if (user) {
     // user authenticated with Firebase
 
     $('#social').hide();
@@ -24,15 +24,15 @@ var auth = new FirebaseSimpleLogin(rootRef, function(error, user) {
     $('#legal').hide();
 
     $('#title').append($('<p>').text('Challenge Creation'))
-        if (startPhrases.length ===  0) {
-            GritRawPhrases(startGenerator);
-        }
+    if (startPhrases.length ===  0) {
+        GritRawPhrases(startGenerator);
+    }
 
     console.log("User ID: " + user.uid + ", Provider: " + user.provider);
-  } else {
+} else {
     console.log("noone logged in ");
     // user is logged out
-  }
+}
 });
 
 var startPhrases = [];
@@ -67,16 +67,16 @@ var GritRawPhrases = function (f) {
         verifyPhrases = GritData.verifyPhrases;
         timePhrases = GritData.timePhrases;
         f();
-  });
+    });
 };
 
 var startGenerator = function () {
-startConstructor(startPhrases);
-  };
+    startConstructor(startPhrases);
+};
 
-  var inputContract;
+var inputContract;
 
-  var output;
+var output;
 
 //initial state
 $('#logo').show();
@@ -99,16 +99,18 @@ $('#completedContract').hide();
 $('.back').hide();
 $('.footer').hide();
 
-//
-    $('.startDiv').remove();
-    $('.verbDiv').remove();
-    $('.quantDiv').remove();
-    $('.franchiseDiv').remove();
-    $('.nounDiv').remove();
-    $('.timeDiv').remove();
-    $('.rewardDiv').remove();
-    $('.verifyDiv').remove();
-    $('.sendDiv').remove();
+$('.startDiv').remove();
+$('.verbDiv').remove();
+$('.quantDiv').remove();
+$('.franchiseDiv').remove();
+$('.nounDiv').remove();
+$('.timeDiv').remove();
+$('.rewardDiv').remove();
+$('.verifyDiv').remove();
+$('.sendDiv').remove();
+
+newContractArray = [];
+newContract = "";
 
 $('#fb').on('click', function() {
     // add facebook login functionallity here
@@ -122,11 +124,10 @@ $('#fb').on('click', function() {
     $('#legal').hide();
 
     $('#title').append($('<p>').text('Challenge Creation'))
-        if (startPhrases.length ===  0) {
-            GritRawPhrases(startGenerator);
-        }
+    if (startPhrases.length ===  0) {
+        GritRawPhrases(startGenerator);
+    }
 });
-
 
 var startConstructor = function (startPhrases) {
     $('#startBuild').show();
@@ -163,8 +164,8 @@ var startConstructor = function (startPhrases) {
 var verbConstructor = function() {
     GritRawPhrases(function() {
         output = buildContractFormat(newContractArray);
-            $('.startDiv').remove();
-            $('.verbDiv').remove();
+        $('.startDiv').remove();
+        $('.verbDiv').remove();
         $('#verbBuild').append($('<div>').addClass('verbDiv'))
         $('.verbDiv').append($('<p>').text(output).addClass('question'));
 
@@ -178,14 +179,14 @@ var verbConstructor = function() {
                 newContract = "";
                 newContractArray = [];
 
-            $('.startDiv').remove();
-            $('.verbDiv').remove();
-            $('.quantDiv').remove();
+                $('.startDiv').remove();
+                $('.verbDiv').remove();
+                $('.quantDiv').remove();
 
-            $('.back').hide();
-            $('#startBuild').show();
-            $('#verbBuild').hide();
-            startConstructor(startPhrases);
+                $('.back').hide();
+                $('#startBuild').show();
+                $('#verbBuild').hide();
+                startConstructor(startPhrases);
             });
 
             var verbClick = ".verb" + keyName;
@@ -206,12 +207,11 @@ var verbConstructor = function() {
     });
 }
 
-
 var quantConstructor = function() {
     GritRawPhrases(function() {
         var output = buildContractFormat(newContractArray);
-            $('.verbDiv').remove();
-            $('.quantDiv').remove();
+        $('.verbDiv').remove();
+        $('.quantDiv').remove();
         $('#quantBuild').append($('<div>').addClass('quantDiv'));
         $('.quantDiv').append($('<p>').text(output).addClass('question'));
 
@@ -224,15 +224,15 @@ var quantConstructor = function() {
             var quantClick = ".quant" + keyName;
             $('#quantBack').click(function() {
 
-            $('.verbDiv').remove();
-            $('.quantDiv').remove();
-            $('.franchiseDiv').remove();
+                $('.verbDiv').remove();
+                $('.quantDiv').remove();
+                $('.franchiseDiv').remove();
 
                 newContractArray.splice(1,1);
                 output = buildContractFormat(newContractArray);
-            $('#verbBuild').show();
-            $('#quantBuild').hide();
-            verbConstructor();
+                $('#verbBuild').show();
+                $('#quantBuild').hide();
+                verbConstructor();
             });
 
             $(quantClick).click(function() {
@@ -264,22 +264,21 @@ var franchiseConstructor = function() {
             if (verb === keyName) {
                 for (var nounKey in franchisePhrases[verb]) {
                     var nounKeyClass = nounKey.replace(/\s/g, "");
-                    // console.log(nounKeyClass === "anyLocation");
-            if (nounKeyClass === "anyLocation") {
-                tempFranchise = ""
-                newContractArray.push(tempFranchise);
-                newContract = output + tempFranchise;
+                    if (nounKeyClass === "anyLocation") {
+                        tempFranchise = ""
+                        newContractArray.push(tempFranchise);
+                        newContract = output + tempFranchise;
 
-            $('.quantDiv').remove();
-            $('.franchiseDiv').remove();
-            $('.nounDiv').remove();
+                        $('.quantDiv').remove();
+                        $('.franchiseDiv').remove();
+                        $('.nounDiv').remove();
 
-                $('#franchiseBuild').hide();
-                $('#nounBuild').show();
-                nounConstructor();
-            }
-            var franchiseClass = "franchise" + nounKeyClass;
-            $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
+                        $('#franchiseBuild').hide();
+                        $('#nounBuild').show();
+                        nounConstructor();
+                    }
+                    var franchiseClass = "franchise" + nounKeyClass;
+                    $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
 
             }
@@ -291,15 +290,15 @@ var franchiseConstructor = function() {
             var franchiseClick = ".franchise" + nounKeyClass;
             $('#franchiseBack').click(function() {
 
-            $('.quantDiv').remove();
-            $('.franchiseDiv').remove();
-            $('.nounDiv').remove();
+                $('.quantDiv').remove();
+                $('.franchiseDiv').remove();
+                $('.nounDiv').remove();
 
                 newContractArray.splice(2,1);
                 output = buildContractFormat(newContractArray);
-            $('#quantBuild').show();
-            $('#franchiseBuild').hide();
-            quantConstructor();
+                $('#quantBuild').show();
+                $('#franchiseBuild').hide();
+                quantConstructor();
             })
 
             $(franchiseClick).click(function() {
@@ -319,7 +318,6 @@ var franchiseConstructor = function() {
     });
 }
 
-
 var nounConstructor = function() {
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
@@ -328,9 +326,9 @@ var nounConstructor = function() {
         var output = buildContractFormat(newContractArray);
         var nouns = franchisePhrases[verb];
         var specificNouns = nouns[business];
-            $('.franchiseDiv').remove();
-            $('.nounDiv').remove();
-            $('.rewardDiv').remove();
+        $('.franchiseDiv').remove();
+        $('.nounDiv').remove();
+        $('.rewardDiv').remove();
 
         $('#nounBuild').append($('<div>').addClass('nounDiv'))
         $('.nounDiv').append($('<p>').text(output).addClass('question'));
@@ -341,23 +339,22 @@ var nounConstructor = function() {
                 for (var nounKey in specificNouns) {
                     var nounClass = "noun" + nounKey;
 
-            $('.nounDiv').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
+                    $('.nounDiv').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
                 }
 
             }
 
         }
 
-            if (keyName === "anyLocation") {
-               for (var nounKey in nouns) {
-                var nounList = nouns[nounKey];
-                for (var keySharp in nounList) {
+        if (keyName === "anyLocation") {
+         for (var nounKey in nouns) {
+            var nounList = nouns[nounKey];
+            for (var keySharp in nounList) {
                 var nounClass = "noun" + keySharp;
-                // console.log(nounClass);
-            $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
-               }
+                $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
             }
-          }
+        }
+    }
 
         //Handler for anyLocations
         var attachHandlerNoun = function(keyList, nounList) {
@@ -365,17 +362,18 @@ var nounConstructor = function() {
                 // newContract = "";
                 // newContractArray = [];
 
-            $('.quantDiv').remove();
-            $('.franchiseDiv').remove();
-            $('.nounDiv').remove();
-            $('.rewardDiv').remove();
+                $('.quantDiv').remove();
+                $('.franchiseDiv').remove();
+                $('.nounDiv').remove();
+                $('.rewardDiv').remove();
 
-            $('#quantBuild').show();
-            $('#nounBuild').hide();
+                $('#quantBuild').show();
+                $('#nounBuild').hide();
                 newContractArray.splice(2,2);
                 output = buildContractFormat(newContractArray);
-            quantConstructor();
+                quantConstructor();
             });
+
             var nounClick = ".noun" + keyList;
             $(nounClick).click(function() {
                 tempNoun = nounList[keyList];
@@ -388,8 +386,6 @@ var nounConstructor = function() {
         }
 
         for (var keyList in nounList) {
-            // console.log(keyList);
-            // console.log(nounList);
             attachHandlerNoun(keyList, nounList);
         }
 
@@ -399,16 +395,15 @@ var nounConstructor = function() {
                 // newContract = "";
                 // newContractArray = [];
 
-            $('.franchiseDiv').remove();
-            $('.nounDiv').remove();
-            $('.rewardDiv').remove();
+                $('.franchiseDiv').remove();
+                $('.nounDiv').remove();
+                $('.rewardDiv').remove();
 
-//            $('.back').hide();
-            $('#franchiseBuild').show();
-            $('#nounBuild').hide();
+                $('#franchiseBuild').show();
+                $('#nounBuild').hide();
                 newContractArray.splice(3,1);
                 output = buildContractFormat(newContractArray);
-            franchiseConstructor();
+                franchiseConstructor();
             });
 
             var nounClick = ".noun" + keyNoun;
@@ -431,40 +426,41 @@ var nounConstructor = function() {
 
 var rewardConstructor = function() {
     var output = buildContractFormat(newContractArray);
-        $('.nounDiv').remove();
-        $('.rewardDiv').remove();
-        $('#rewardBuild').append($('<div>').addClass('rewardDiv'))
-        $('.rewardDiv').append($('<p>').text(output).addClass('question'))
+    $('.nounDiv').remove();
+    $('.rewardDiv').remove();
+    $('#rewardBuild').append($('<div>').addClass('rewardDiv'))
+    $('.rewardDiv').append($('<p>').text(output).addClass('question'))
     for (var keyName in rewardPhrases.combined) {
         var rewardClass = "reward" + keyName;
         $('.rewardDiv').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
     }
 
-        var attachHandlerReward = function(keyName) {
-            var rewardClick = ".reward" + keyName;
-            $(rewardClick).click(function () {
-            $('#rewardBack').click(function () {//** not working first time through**
+    var attachHandlerReward = function(keyName) {
+        var rewardClick = ".reward" + keyName;
+        $(rewardClick).click(function () {
 
-            $('.nounDiv').remove();
-            $('.rewardDiv').remove();
-            $('.timeDiv').remove();
+            tempReward = rewardPhrases.combined[keyName];
+            newContractArray.push(tempReward);
+            newContract = newContract + tempReward;
 
-                newContractArray.splice(4,1);
-                output = buildContractFormat(newContractArray);
-            $('#nounBuild').show();
             $('#rewardBuild').hide();
-            nounConstructor();
-            })
-                tempReward = rewardPhrases.combined[keyName];
-                newContractArray.push(tempReward);
-                newContract = newContract + tempReward;
+            $('#timeBuild').show();
+            timeConstructor();
 
-                $('#rewardBuild').hide();
-                $('#timeBuild').show();
-                timeConstructor();
+        });
+    }
 
-            });
-        }
+    $('#rewardBack').click(function () {
+        $('.nounDiv').remove();
+        $('.rewardDiv').remove();
+        $('.timeDiv').remove();
+
+        newContractArray.splice(4,1);
+        output = buildContractFormat(newContractArray);
+        $('#nounBuild').show();
+        $('#rewardBuild').hide();
+        nounConstructor();
+    })
 
     for (var keyName in rewardPhrases.combined) {
         attachHandlerReward(keyName);
@@ -486,29 +482,28 @@ var timeConstructor = function() {
     var attachHandlerTime = function(keyName) {
         var timeClick = ".time" + keyName;
         $(timeClick).click(function() {
-        $('#timeBack').click(function() {//** not working first time through**
 
+        tempTime = timePhrases[keyName];
+        newContractArray.push(tempTime);
+        newContract = newContract + tempTime;
+
+        $('#timeBuild').hide();
+        $('#title').hide();
+        $('#verification').show();
+        $('#verifyBuild').show();
+        verifyConstructor();
+    });
+        $('#timeBack').click(function() {
             $('.rewardDiv').remove();
             $('.timeDiv').remove();
             $('.verifyDiv').remove();
 
-                newContractArray.splice(5,1);
-                output = buildContractFormat(newContractArray);
+            newContractArray.splice(5,1);
+            output = buildContractFormat(newContractArray);
             $('#rewardBuild').show();
             $('#timeBuild').hide();
             rewardConstructor();
         })
-            tempTime = timePhrases[keyName];
-            newContractArray.push(tempTime);
-            newContract = newContract + tempTime;
-
-            $('#timeBuild').hide();
-            $('#title').hide();
-            $('#verification').show();
-            $('#verifyBuild').show();
-            verifyConstructor();
-
-        });
     }
 
     for (var keyName in timePhrases) {
@@ -536,33 +531,32 @@ var verifyConstructor = function() {
 
         var verifyClick = ".verify" + i;
         $(verifyClick).click(function() {
-        $(verifyBack).click(function() {//** not working first time through**
-
-            $('.timeDiv').remove();
-            $('.verifyDiv').remove();
-            $('.sendDiv').remove();
-
-                newContractArray.splice(6,1);
-                output = buildContractFormat(newContractArray);
-            $('#timeBuild').show();
-            $('#verifyBuild').hide();
-            timeConstructor();
-        })
-            if (verifyClick === ".verify0") {
+        if (verifyClick === ".verify0") {
             $('#startBuild').show();
             $('#verifyBuild').hide();
             newContractArray = [];
             newContract = "";
             startConstructor(startPhrases);
-            } else {
+        } else {
             tempVerify = verifyPhrases[i];
 
             $('#verifyBuild').hide();
             $('#verification').hide();
             $('#sendBuild').show();
             sendConstructor();
-            };
-        });
+        };
+    });
+        $(verifyBack).click(function() {
+            $('.timeDiv').remove();
+            $('.verifyDiv').remove();
+            $('.sendDiv').remove();
+
+            newContractArray.splice(6,1);
+            output = buildContractFormat(newContractArray);
+            $('#timeBuild').show();
+            $('#verifyBuild').hide();
+            timeConstructor();
+        })
     }
 
     for (i = 0; i < verifyPhrases.length; i++) {
@@ -576,7 +570,6 @@ var sendConstructor = function() {
     $('#sendBuild').append($('<div>').addClass('sendDiv'));
     $('.sendDiv').append($('<p>').text("Sending to Facebook").addClass('question'));
 }
-
 
 var buildContractFormat = function(CA) {
     var output = "";
