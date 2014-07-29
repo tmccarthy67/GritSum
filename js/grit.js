@@ -402,7 +402,7 @@ var nounConstructor = function() {
         }
 
     });
-};
+}
 
 var rewardConstructor = function() {
     var output = buildContractFormat(newContractArray);
@@ -560,5 +560,5 @@ var clearDivs = function () {
     $('.rewardDiv').remove();
     $('.verifyDiv').remove();
     $('.sendDiv').remove();
-    return;
-};
+    // return;
+}
