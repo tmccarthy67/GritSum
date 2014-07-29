@@ -158,7 +158,6 @@ var startConstructor = function (startPhrases) {
     for (var keyName in startPhrases) {
         attachHandler(keyName);
     }
-
 }
 
 var verbConstructor = function() {
@@ -262,10 +261,23 @@ var franchiseConstructor = function() {
         $('.franchiseDiv').append($('<p>').text(output).addClass('question'));
 
         for (var keyName in franchisePhrases) {
-
             if (verb === keyName) {
                 for (var nounKey in franchisePhrases[verb]) {
                     var nounKeyClass = nounKey.replace(/\s/g, "");
+                    // console.log(nounKeyClass === "anyLocation");
+            if (nounKeyClass === "anyLocation") {
+                tempFranchise = ""
+                newContractArray.push(tempFranchise);
+                newContract = output + tempFranchise;
+
+            $('.quantDiv').remove();
+            $('.franchiseDiv').remove();
+            $('.nounDiv').remove();
+
+                $('#franchiseBuild').hide();
+                $('#nounBuild').show();
+                nounConstructor();
+            }
             var franchiseClass = "franchise" + nounKeyClass;
             $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
@@ -316,8 +328,10 @@ var nounConstructor = function() {
         var output = buildContractFormat(newContractArray);
         var nouns = franchisePhrases[verb];
         var specificNouns = nouns[business];
-        $('.nounDiv').remove();
-        $('.franchiseDiv').remove();
+            $('.franchiseDiv').remove();
+            $('.nounDiv').remove();
+            $('.rewardDiv').remove();
+
         $('#nounBuild').append($('<div>').addClass('nounDiv'))
         $('.nounDiv').append($('<p>').text(output).addClass('question'));
 
@@ -331,38 +345,89 @@ var nounConstructor = function() {
                 }
 
             }
+
         }
 
-        var attachHandlerNoun = function(nounKey) {
-            var nounClick = ".noun" + nounKey;
-            $(nounClick).click(function() {
-            $('#nounBack').click(function() {//** not working first time through**
+            if (keyName === "anyLocation") {
+               for (var nounKey in nouns) {
+                var nounList = nouns[nounKey];
+                for (var keySharp in nounList) {
+                var nounClass = "noun" + keySharp;
+                // console.log(nounClass);
+            $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
+               }
+            }
+          }
 
+        //Handler for anyLocations
+        var attachHandlerNoun = function(keyList, nounList) {
+            $('#nounBack').click(function() {
+                // newContract = "";
+                // newContractArray = [];
+
+            $('.quantDiv').remove();
             $('.franchiseDiv').remove();
             $('.nounDiv').remove();
             $('.rewardDiv').remove();
 
-                newContractArray.splice(3,1);
-                output = buildContractFormat(newContractArray);
-            $('#franchiseBuild').show();
+            $('#quantBuild').show();
             $('#nounBuild').hide();
-            franchiseConstructor();
-            })
-
-                tempNoun = specificNouns[nounKey];
+                newContractArray.splice(2,2);
+                output = buildContractFormat(newContractArray);
+            quantConstructor();
+            });
+            var nounClick = ".noun" + keyList;
+            $(nounClick).click(function() {
+                tempNoun = nounList[keyList];
                 newContractArray.push(tempNoun);
                 newContract = output + tempNoun;
-
                 $('#nounBuild').hide();
                 $('#rewardBuild').show();
                 rewardConstructor();
             });
         }
-        for (var nounKey in specificNouns) {
-            attachHandlerNoun(nounKey);
+
+        for (var keyList in nounList) {
+            // console.log(keyList);
+            // console.log(nounList);
+            attachHandlerNoun(keyList, nounList);
         }
+
+        //Handler for all except anyLocaitons
+        var attachHandlerNounAll = function(keyNoun, specificNouns) {
+            $('#nounBack').click(function() {
+                // newContract = "";
+                // newContractArray = [];
+
+            $('.franchiseDiv').remove();
+            $('.nounDiv').remove();
+            $('.rewardDiv').remove();
+
+//            $('.back').hide();
+            $('#franchiseBuild').show();
+            $('#nounBuild').hide();
+                newContractArray.splice(3,1);
+                output = buildContractFormat(newContractArray);
+            franchiseConstructor();
+            });
+
+            var nounClick = ".noun" + keyNoun;
+            $(nounClick).click(function() {
+                tempNoun = specificNouns[keyNoun];
+                newContractArray.push(tempNoun);
+                newContract = output + tempNoun;
+                $('#nounBuild').hide();
+                $('#rewardBuild').show();
+                rewardConstructor();
+            });
+        }
+
+        for (var keyNoun in specificNouns) {
+            attachHandlerNounAll(keyNoun, specificNouns);
+        }
+
     });
-}
+};
 
 var rewardConstructor = function() {
     var output = buildContractFormat(newContractArray);
@@ -404,7 +469,6 @@ var rewardConstructor = function() {
     for (var keyName in rewardPhrases.combined) {
         attachHandlerReward(keyName);
     }
-
 }
 
 var timeConstructor = function() {
@@ -450,7 +514,6 @@ var timeConstructor = function() {
     for (var keyName in timePhrases) {
         attachHandlerTime(keyName);
     }
-
 }
 
 var verifyConstructor = function() {
@@ -505,7 +568,6 @@ var verifyConstructor = function() {
     for (i = 0; i < verifyPhrases.length; i++) {
         attachHandlerVerify(i);
     }
-
 }
 
 var sendConstructor = function() {
@@ -513,7 +575,6 @@ var sendConstructor = function() {
     $('.sendDiv').remove();
     $('#sendBuild').append($('<div>').addClass('sendDiv'));
     $('.sendDiv').append($('<p>').text("Sending to Facebook").addClass('question'));
-
 }
 
 
