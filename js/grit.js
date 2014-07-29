@@ -130,6 +130,7 @@ $('#fb').on('click', function() {
 });
 
 var startConstructor = function (startPhrases) {
+      console.log('start');
     $('#startBuild').show();
 
         clearDivs();
@@ -148,7 +149,7 @@ var startConstructor = function (startPhrases) {
             tempStart = startPhrases[keyName];
             newContractArray.push(tempStart);
             newContract = newContract + tempStart
-
+                console.log('start handler');
             clearDivs();
             $('#startBuild').hide();
             $('#verbBuild').show();
@@ -163,6 +164,7 @@ var startConstructor = function (startPhrases) {
 }
 
 var verbConstructor = function() {
+        console.log('verb');
     GritRawPhrases(function() {
         output = buildContractFormat(newContractArray);
         clearDivs();
@@ -178,6 +180,7 @@ var verbConstructor = function() {
             $('#verbBack').click(function() {
                 newContract = "";
                 newContractArray = [];
+                    console.log('verb handler');
 
                 clearDivs();
 
@@ -206,6 +209,7 @@ var verbConstructor = function() {
 }
 
 var quantConstructor = function() {
+        console.log('quant');
     GritRawPhrases(function() {
         var output = buildContractFormat(newContractArray);
         clearDivs();
@@ -220,6 +224,7 @@ var quantConstructor = function() {
         var attachHandlerQuant = function(keyName) {
             var quantClick = ".quant" + keyName;
             $('#quantBack').click(function() {
+                    console.log('quant handler');
 
                 clearDivs();
                 newContractArray.splice(1,1);
@@ -246,6 +251,7 @@ var quantConstructor = function() {
 }
 
 var franchiseConstructor = function() {
+        console.log('franchise');
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
         var output = buildContractFormat(newContractArray);
@@ -280,6 +286,7 @@ var franchiseConstructor = function() {
             var nounKeyClass = nounKey.replace(/\s/g, "");
             var franchiseClick = ".franchise" + nounKeyClass;
             $('#franchiseBack').click(function() {
+                console.log('franchise handler');
 
                 clearDivs();
 
@@ -308,6 +315,7 @@ var franchiseConstructor = function() {
 }
 
 var nounConstructor = function() {
+        console.log('noun');
     GritRawPhrases(function() {
         verb = (newContractArray[1]).trim();
         var business = (newContractArray[3]);
@@ -348,6 +356,7 @@ var nounConstructor = function() {
             $('#nounBack').click(function() {
                 // newContract = "";
                 // newContractArray = [];
+                    console.log('noun handler');
 
                 clearDivs();
 
@@ -378,6 +387,7 @@ var nounConstructor = function() {
             $('#nounBack').click(function() {
                 // newContract = "";
                 // newContractArray = [];
+                console.log('noun handler all');
                 clearDivs();
                 $('#franchiseBuild').show();
                 $('#nounBuild').hide();
@@ -405,6 +415,7 @@ var nounConstructor = function() {
 }
 
 var rewardConstructor = function() {
+        console.log('reward');
     var output = buildContractFormat(newContractArray);
         clearDivs();
     $('#rewardBuild').append($('<div>').addClass('rewardDiv'))
@@ -415,6 +426,7 @@ var rewardConstructor = function() {
     }
 
     var attachHandlerReward = function(keyName) {
+            console.log('reward handler');
         var rewardClick = ".reward" + keyName;
         $(rewardClick).click(function () {
 
@@ -445,6 +457,7 @@ var rewardConstructor = function() {
 }
 
 var timeConstructor = function() {
+    console.log('time');
     var output = buildContractFormat(newContractArray);
     clearDivs();
     $('#timeBuild').append($('<div>').addClass('timeDiv'));
@@ -456,6 +469,7 @@ var timeConstructor = function() {
     }
 
     var attachHandlerTime = function(keyName) {
+            console.log('time handler');
         var timeClick = ".time" + keyName;
         $(timeClick).click(function() {
 
@@ -486,6 +500,7 @@ var timeConstructor = function() {
 }
 
 var verifyConstructor = function() {
+    console.log('verify');
     $('.verificationTextDiv').remove();
     $('#verification').append($('<div>').addClass('verificationTextDiv'))
     $('.verificationTextDiv').append($('<p>').text("Contract Verification"));
@@ -508,6 +523,7 @@ var verifyConstructor = function() {
         if (verifyClick === ".verify0") {
             $('#startBuild').show();
             $('#verifyBuild').hide();
+            console.log('verify handler');
             newContractArray = [];
             newContract = "";
             startConstructor(startPhrases);
@@ -551,6 +567,7 @@ var buildContractFormat = function(CA) {
 }
 
 var clearDivs = function () {
+    console.log('clearDivs');
     $('.startDiv').remove();
     $('.verbDiv').remove();
     $('.quantDiv').remove();
