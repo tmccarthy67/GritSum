@@ -1,6 +1,4 @@
-// ******
-// Hey Clay - BlackBox stuff below here - please ignore
-// ******
+
 var newContractArray = new Array;
 var newContract;
 
@@ -16,19 +14,13 @@ var auth = new FirebaseSimpleLogin(rootRef, function(error, user) {
     console.log("Login Error:", error);
 } else if (user) {
     // user authenticated with Firebase
+    window.USER = user;
 
-    $('#social').hide();
-    $('#title').show();
-    //    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
-    $('#contractConstruction').show();
-    $('#legal').hide();
-
-    $('#title').append($('<p>').text('Challenge Creation'))
-    if (startPhrases.length ===  0) {
-        GritRawPhrases(startGenerator);
+    //alert("Logged in " + localStorage.getItem('authByClick'));
+    if (localStorage.getItem('authByClick') == 'yes'){
+        startFriendSelector();
+        localStorage.setItem('authByClick',  'no');
     }
-
-    console.log("User ID: " + user.uid + ", Provider: " + user.provider);
 } else {
     console.log("noone logged in ");
     // user is logged out
@@ -78,6 +70,8 @@ var inputContract;
 
 var output;
 
+function initApp(){
+
 //initial state
 $('#logo').show();
 $('#social').show();
@@ -98,6 +92,7 @@ $('#sendBuild').hide();
 $('#completedContract').hide();
 $('.back').hide();
 $('.footer').hide();
+$('#friendSelector').hide();
 
 $('.startDiv').remove();
 $('.verbDiv').remove();
@@ -111,23 +106,72 @@ $('.sendDiv').remove();
 
 newContractArray = [];
 newContract = "";
+}
+
+initApp();
 
 $('#fb').on('click', function() {
     // add facebook login functionallity here
 
-    auth.login('facebook');
+    localStorage.setItem('authByClick',  'yes');
+    auth.login('facebook', {scope:'email,user_friends', preferRedirect:true});
+});
 
+$('#nofb').on('click', function (){
+    oponent = "";
+    startChallengeCreation();
+});
+
+var startFriendSelector = function(){
+    var token = USER.accessToken;
+    $.getJSON("https://graph.facebook.com/me/friends?access_token="+token, function(res){
+        console.log(res);
+        $('#social').hide();
+        $('#legal').hide();
+
+        var section = $('#friendSelector > ul');
+        $.each(res.data, function(idx, friend){
+
+            $.getJSON("https://graph.facebook.com/"+friend.id+"?access_token="+token, function(friendDetails){
+                console.log("friend info", friendDetails);
+
+                var f = friendDetails;
+                //create the list element for this friend
+                var imgsrc= 'http://graph.facebook.com/'+f.id+'/picture?height=100&type=normal&width=100';
+                var html = "<li id="+f.id+"><a href='#'><img src='"+imgsrc+"' ><h2>"+f.name+"</h2></a></li>";
+                section.append($(html));
+                $("#"+f.id).on('click', function(){
+                    window.oponent = f;
+                    startChallengeCreation();
+                });
+            });
+
+            //atach an event Handler for this friend
+
+        });
+
+        $('#friendSelector').show();
+    });
+
+    //startChallengeCreation();
+
+};
+
+var startChallengeCreation = function(){
     $('#social').hide();
+    $('#friendSelector').hide();
     $('#title').show();
     //    $('#search').show(); <!-- placeholder for future development of adding the abililty to search server side (sponsored?) or server side (most popular) or local (previous challenges) -->
     $('#contractConstruction').show();
     $('#legal').hide();
 
-    $('#title').append($('<p>').text('Challenge Creation'))
+    if (oponent != "") {
+    var message = oponent.first_name + " has been challenged by " + USER.thirdPartyUserData.first_name};
+    $('#title').append($('<p>').text(message));
     if (startPhrases.length ===  0) {
         GritRawPhrases(startGenerator);
     }
-});
+}
 
 var startConstructor = function (startPhrases) {
     clearDivs();
@@ -548,12 +592,31 @@ var verifyConstructor = function() {
     }
 }
 
+
+
+
 var sendConstructor = function() {
 
     clearDivs();
     $('#sendBuild').append($('<div>').addClass('sendDiv'));
     $('.sendDiv').append($('<p>').text("Sending to Facebook").addClass('question'));
     $('.sendDiv').append($('<div>').attr('id', 'sendBack').addClass('back'))
+
+
+    console.log("AUTH RESPONSE", FB.getAuthResponse());
+
+
+    FB.ui({method: 'apprequests',
+      message: buildContractFormat(newContractArray),
+      to: window.oponent.id,
+    }, function(response){
+        console.log(response);
+        initApp();
+        startFriendSelector();
+    });
+
+
+//>>>>>>> c267d35891fbd95642cb279cedcb5cba43d34ab3
 }
 
 var buildContractFormat = function(CA) {
