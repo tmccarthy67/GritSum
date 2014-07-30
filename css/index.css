@@ -132,6 +132,19 @@ div#logo{
 
 }
 
+#friendSelector{
+    font-size: 6px;
+}
+
+#friendSelector ul{
+    list-style-type: none;
+}
+
+#friendSelector img{
+    width: 30%;
+
+}
+
 #connect{
     max-width: 100%;
     font-size: 24px;
