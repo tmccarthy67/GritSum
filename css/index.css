@@ -132,6 +132,154 @@ div#logo{
 
 }
 
+#startCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.start99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+}
+
+#verbCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.verb99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+}
+
+#quantCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.quant99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;  
+}
+
+#franchiseCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.franchisecustom{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;   
+}
+}
+
+#nounCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.noun99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;   
+}
+
+#rewardCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.reward99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+}
+
+#timeCustomInput{
+    color: #088889;
+    border: 2px solid #088889;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.time99{
+    font-family: serif;
+    background-color: #c7c092;
+    color: #b12134;
+    font-weight: bold;
+    border: 2px solid #088889;
+    border-radius: 10px;
+    font-size: 14px;
+    font-size: 4.4vw;
+    text-transform: uppercase;
+}
+
 #friendSelector{
     font-size: 6px;
 }
