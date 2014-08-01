@@ -176,7 +176,7 @@ var startConstructor = function (startPhrases) {
         for (var keyName in startPhrases) {
             var startClass = "start" + keyName;
             if (keyName === '99') {
-                $('.startDiv').append($('<input id="startCustomInput">'))
+                $('.startDiv').append($('<input id="startCustomInput" placeholder="Start phrase...">'))
                 .append($('<input type="button" value="click" class="start' + keyName + '">'))
             } else {
 
@@ -186,14 +186,11 @@ var startConstructor = function (startPhrases) {
 
         var attachHandler = function(keyName) {
             var startClick = ".start" + keyName;
-            $(startClick).click(function () {
-                if (startClick === ".start99") {
-                    var attachCustomStart = $(this).attr(".start99");
-                    var getCustomStart = $.get(attachCustomStart);
+
+            $('#startCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
                     var startCustom = document.getElementById('startCustomInput').value
-                    if (startCustom === null){
-                        return
-                    }
                     tempStart = startCustom + " ";
                     newContractArray.push(tempStart);
                     newContract = newContract + tempStart
@@ -203,7 +200,13 @@ var startConstructor = function (startPhrases) {
             $('.back').show();
             verbConstructor();
             return;
-        }
+                    if (startCustom === null){
+                        return
+                    }
+                }
+            });
+
+            $(startClick).click(function () {
         tempStart = startPhrases[keyName];
         newContractArray.push(tempStart);
         newContract = newContract + tempStart
@@ -231,7 +234,7 @@ var verbConstructor = function() {
         for (var keyName in verbPhrases) {
             var verbClass = "verb" + keyName;
             if (keyName === '99') {
-                $('.verbDiv').append($('<input id="verbCustomInput">'))
+                $('.verbDiv').append($('<input id="verbCustomInput" placeholder="Verb ...">'))
                 .append($('<input type="button" value="click" class="verb' + keyName + '">'))
             } else {
 
@@ -253,24 +256,26 @@ var verbConstructor = function() {
 
         var attachHandlerVerb = function(keyName) {
             var verbClick = ".verb" + keyName;
-            $(verbClick).click(function() {
-            if (verbClick === ".verb99") {
 
-            var attachCustomVerb = $(this).attr(".verb99");
-            var getCustomVerb = $.get(attachCustomVerb);
-            var verbCustom = document.getElementById('verbCustomInput').value
-            if (verbCustom === null){
-                    return
-                }
-            tempVerb = (verbCustom + " ");
-            newContractArray.push(tempVerb);
-            newContract = newContract + tempVerb
+            $('#verbCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var verbCustom = document.getElementById('verbCustomInput').value
+                    tempVerb = verbCustom + " ";
+                    newContractArray.push(tempVerb);
+                    newContract = newContract + tempVerb
             // clearDivs();
-            $('#verbBuild').hide();
-            $('#quantBuild').show();
-            quantConstructor();
+                $('#verbBuild').hide();
+                $('#quantBuild').show();
+                quantConstructor();
             return;
-        }
+                    if (verbCustom === null){
+                        return
+                    }
+                }
+            });
+
+            $(verbClick).click(function() {
                 tempVerb = verbPhrases[keyName];
                 newContractArray.push(tempVerb);
                 newContract = output + tempVerb;
@@ -299,7 +304,7 @@ var quantConstructor = function() {
             var quantClass = "quant" + keyName;
             var verbClass = "verb" + keyName;
             if (keyName === '99') {
-                $('.quantDiv').append($('<input id="quantCustomInput">'))
+                $('.quantDiv').append($('<input id="quantCustomInput" placeholder="Quantity...">'))
                 .append($('<input type="button" value="click" class="quant' + keyName + '">'))
             } else {
             $('.quantDiv').append($('<p>').text(quantPhrases[keyName]).addClass(quantClass))
@@ -317,24 +322,27 @@ var quantConstructor = function() {
 
         var attachHandlerQuant = function(keyName) {
             var quantClick = ".quant" + keyName;
-            $(quantClick).click(function() {
-            if (quantClick === ".quant99") {
-            var attachCustomQuant = $(this).attr(".quant99");
-            var getCustomQuant = $.get(attachCustomQuant);
-            var quantCustom = document.getElementById('quantCustomInput').value
-            if (quantCustom === null){
-                    return
-                }
-            tempQuant = (quantCustom + " ");
-            newContractArray.push(tempQuant);
-            newContract = newContract + tempQuant
+
+            $('#quantCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var quantCustom = document.getElementById('quantCustomInput').value
+                    tempQuant = quantCustom + " ";
+                    newContractArray.push(tempQuant);
+                    newContract = newContract + tempQuant
             // clearDivs();
             $('#quantBuild').hide();
             $('#franchiseBuild').show();
             franchiseConstructor();
             return;
-        }
+                    if (quantCustom === null){
+                        return
+                    }
+                }
+            });
 
+
+            $(quantClick).click(function() {
                 tempQuant = quantPhrases[keyName];
                 newContractArray.push(tempQuant);
                 newContract = output + tempQuant;
@@ -376,7 +384,7 @@ var franchiseConstructor = function() {
                     }
                     var franchiseClass = "franchise" + nounKeyClass;
                     if (nounKeyClass === 'custom') {
-                        $('.franchiseDiv').append($('<input id="franchiseCustomInput">'))
+                        $('.franchiseDiv').append($('<input id="franchiseCustomInput" placeholder="Franchise...">'))
                         .append($('<input type="button" value="click" class="franchise' + nounKeyClass + '">'))
                     } else {
                     $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
@@ -400,24 +408,25 @@ var franchiseConstructor = function() {
             var nounKeyClass = nounKey.replace(/\s/g, "");
             var franchiseClick = ".franchise" + nounKeyClass;
 
-            $(franchiseClick).one('click',function() {
-            if (franchiseClick === ".franchisecustom") {
-            var attachCustomFranchise = $(this).attr(".franchisecustom");
-            var getCustomFranchise = $.get(attachCustomFranchise);
-            var franchiseCustom = document.getElementById('franchiseCustomInput').value
-            if (franchiseCustom === null){
-                    return
-                }
-            tempFranchise = (franchiseCustom + " ");
-            newContractArray.push(tempFranchise);
-            newContract = newContract + tempFranchise
+            $('#franchiseCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var franchiseCustom = document.getElementById('franchiseCustomInput').value
+                    tempFranchise = franchiseCustom + " ";
+                    newContractArray.push(tempFranchise);
+                    newContract = newContract + tempFranchise
             // clearDivs();
-            $('#franchiseBuild').hide();
-            $('#nounBuild').show();
-            nounConstructor();
+                $('#franchiseBuild').hide();
+                $('#nounBuild').show();
+                nounConstructor();
             return;
-        }
+                    if (quantCustom === null){
+                        return
+                    }
+                }
+            });
 
+            $(franchiseClick).one('click',function() {
                 tempFranchise = nounKey;
                 newContractArray.push(tempFranchise);
                 newContract = output + tempFranchise;
@@ -452,25 +461,25 @@ var nounConstructor = function() {
             if (business === keyName) {
                 for (var nounKey in specificNouns) {
                     var nounClass = "noun" + nounKey;
-
+            if (nounClass !== "noun99")
                     $('.nounDiv').append($('<p>').text(specificNouns[nounKey]).addClass(nounClass))
                 }
 
             }
-            if (keyName === "custom") {
+            if (keyName === "custom" ) {
                 var putItHere = nouns[keyName];
 
-                $('.nounDiv').append($('<input id="nounCustomInput">'))
+                $('.nounDiv').append($('<input id="nounCustomInput" placeholder="Noun...">'))
                 .append($('<input type="button" value="click" class="noun99">'))
             }
-        }
 
-        if (keyName === "anyLocation") {
-           for (var nounKey in nouns) {
-                var nounList = nouns[nounKey];
-                for (var keySharp in nounList) {
-                    var nounClass = "noun" + keySharp;
-                    $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
+            if (keyName === "anyLocation") {
+               for (var nounKey in nouns) {
+                    var nounList = nouns[nounKey];
+                    for (var keySharp in nounList) {
+                        var nounClass = "noun" + keySharp;
+                        $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
+                    }
                 }
             }
         }
@@ -489,6 +498,25 @@ var nounConstructor = function() {
        //Handler for anyLocations
        var attachHandlerNoun = function(keyList, nounList) {
         var nounClick = ".noun" + keyList;
+
+            $('#nounCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var nounCustom = document.getElementById('nounCustomInput').value
+                    tempNoun = nounCustom + " ";
+                    newContractArray.push(tempNoun);
+                    newContract = newContract + tempNoun
+            // clearDivs();
+                $('#nounBuild').hide();
+                $('#rewardBuild').show();
+                rewardConstructor();
+            return;
+                    if (nounCustom === null){
+                        return
+                    }
+                }
+            });
+
         $(nounClick).click(function() {
 
             tempNoun = nounList[keyList];
@@ -507,22 +535,26 @@ var nounConstructor = function() {
         //Handler for all except anyLocaitons
         var attachHandlerNounAll = function(keyNoun, specificNouns) {
             var nounClick = ".noun" + keyNoun;
-            $(nounClick).click(function() {
 
-            var attachCustomNoun = $(this).attr(".noun99");
-            var getCustomNoun = $.get(attachCustomNoun);
-            var nounCustom = document.getElementById('nounCustomInput').value
-            //var nounCustom = prompt("Change Noun", getCustomNoun.nounClick);
-            if (nounCustom === null){
-                    return
-                }
-            tempNoun = (nounCustom + " ");
-            newContractArray.push(tempNoun);
-            newContract = output + tempNoun;
-            $('#nounBuild').hide();
-            $('#rewardBuild').show();
-            rewardConstructor();
+            $('#nounCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var nounCustom = document.getElementById('nounCustomInput').value
+                    tempNoun = nounCustom + " ";
+                    newContractArray.push(tempNoun);
+                    newContract = newContract + tempNoun
+            // clearDivs();
+                $('#nounBuild').hide();
+                $('#rewardBuild').show();
+                rewardConstructor();
             return;
+                    if (nounCustom === null){
+                        return
+                    }
+                }
+            });
+
+            $(nounClick).click(function() {
 
                 tempNoun = specificNouns[keyNoun];
                 newContractArray.push(tempNoun);
@@ -554,7 +586,7 @@ var rewardConstructor = function() {
     for (var keyName in rewardCombined) {
         var rewardClass = "reward" + keyName;
             if (keyName === '99') {
-                $('.rewardDiv').append($('<input id="rewardCustomInput">'))
+                $('.rewardDiv').append($('<input id="rewardCustomInput"  placeholder="Reward...">'))
                 .append($('<input type="button" value="click" class="reward' + keyName + '">'))
             } else {
         $('.rewardDiv').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
@@ -572,24 +604,27 @@ var rewardConstructor = function() {
 
     var attachHandlerReward = function(keyName) {
         var rewardClick = ".reward" + keyName;
-        $(rewardClick).click(function () {
 
-            if (rewardClick === ".reward99") {
-            var attachCustomReward = $(this).attr(".reward99");
-            var getCustomReward = $.get(attachCustomReward);
-            var rewardCustom = document.getElementById('rewardCustomInput').value
-            if (rewardCustom === null){
-                    return
-                }
-            tempReward = (rewardCustom + " ");
-            newContractArray.push(tempReward);
-            newContract = newContract + tempReward
+            $('#rewardCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var rewardCustom = document.getElementById('rewardCustomInput').value
+                    tempReward = rewardCustom + " ";
+                    newContractArray.push(tempReward);
+                    newContract = newContract + tempReward
             // clearDivs();
             $('#rewardBuild').hide();
             $('#timeBuild').show();
             timeConstructor();
             return;
-        }
+                    if (rewardCustom === null){
+                        return
+                    }
+                }
+            });
+
+
+        $(rewardClick).click(function () {
 
             tempReward = rewardPhrases.combined[keyName];
             newContractArray.push(tempReward);
@@ -618,7 +653,7 @@ var timeConstructor = function() {
     for (var keyName in timePhrases) {
         var timeClass = "time" + keyName;
             if (keyName === '99') {
-                $('.timeDiv').append($('<input id="timeCustomInput">'))
+                $('.timeDiv').append($('<input id="timeCustomInput"  placeholder="When...">'))
                 .append($('<input type="button" value="click" class="time' + keyName + '">'))
             } else {
         $('.timeDiv').append($('<p>').text(timePhrases[keyName]).addClass(timeClass))
@@ -637,18 +672,14 @@ var timeConstructor = function() {
 
     var attachHandlerTime = function(keyName) {
         var timeClick = ".time" + keyName;
-        $(timeClick).click(function() {
 
-            if (timeClick === ".time99") {
-            var attachCustomTime = $(this).attr(".time99");
-            var getCustomTime = $.get(attachCustomTime);
-            var timeCustom = document.getElementById('timeCustomInput').value
-            if (timeCustom === null){
-                    return
-                }
-            tempTime = (timeCustom + " ");
-            newContractArray.push(tempTime);
-            newContract = newContract + tempTime
+            $('#timeCustomInput').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    var timeCustom = document.getElementById('timeCustomInput').value
+                    tempTime = timeCustom + " ";
+                    newContractArray.push(tempTime);
+                    newContract = newContract + tempTime
             // clearDivs();
             $('#timeBuild').hide();
             $('#title').hide();
@@ -656,7 +687,33 @@ var timeConstructor = function() {
             $('#verifyBuild').show();
             verifyConstructor();
             return;
-        }
+                    if (timeCustom === null){
+                        return
+                    }
+                }
+            });
+
+
+        $(timeClick).click(function() {
+
+        //     if (timeClick === ".time99") {
+        //     var attachCustomTime = $(this).attr(".time99");
+        //     var getCustomTime = $.get(attachCustomTime);
+        //     var timeCustom = document.getElementById('timeCustomInput').value
+        //     if (timeCustom === null){
+        //             return
+        //         }
+        //     tempTime = (timeCustom + " ");
+        //     newContractArray.push(tempTime);
+        //     newContract = newContract + tempTime
+        //     // clearDivs();
+        //     $('#timeBuild').hide();
+        //     $('#title').hide();
+        //     $('#verification').show();
+        //     $('#verifyBuild').show();
+        //     verifyConstructor();
+        //     return;
+        // }
 
             tempTime = timePhrases[keyName];
             newContractArray.push(tempTime);
