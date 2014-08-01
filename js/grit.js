@@ -176,7 +176,6 @@ var startConstructor = function (startPhrases) {
         for (var keyName in startPhrases) {
             var startClass = "start" + keyName;
             if (keyName === '99') {
-                console.log(keyName);
                 $('.startDiv').append($('<input id="startCustomInput">'))
                 .append($('<input type="button" value="click" class="start' + keyName + '">'))
             } else {
@@ -231,7 +230,13 @@ var verbConstructor = function() {
 
         for (var keyName in verbPhrases) {
             var verbClass = "verb" + keyName;
+            if (keyName === '99') {
+                $('.verbDiv').append($('<input id="verbCustomInput">'))
+                .append($('<input type="button" value="click" class="verb' + keyName + '">'))
+            } else {
+
             $('.verbDiv').append($('<p>').text(verbPhrases[keyName]).addClass(verbClass))
+            }
         }
 
         $('#verbBack').one('click',function() {
@@ -253,7 +258,7 @@ var verbConstructor = function() {
 
             var attachCustomVerb = $(this).attr(".verb99");
             var getCustomVerb = $.get(attachCustomVerb);
-            var verbCustom = prompt("Change Verb", getCustomVerb.verbClick);
+            var verbCustom = document.getElementById('verbCustomInput').value
             if (verbCustom === null){
                     return
                 }
@@ -292,7 +297,13 @@ var quantConstructor = function() {
 
         for (var keyName in quantPhrases) {
             var quantClass = "quant" + keyName;
+            var verbClass = "verb" + keyName;
+            if (keyName === '99') {
+                $('.quantDiv').append($('<input id="quantCustomInput">'))
+                .append($('<input type="button" value="click" class="quant' + keyName + '">'))
+            } else {
             $('.quantDiv').append($('<p>').text(quantPhrases[keyName]).addClass(quantClass))
+            }
         }
 
         $('#quantBack').one('click',function() {
@@ -310,7 +321,7 @@ var quantConstructor = function() {
             if (quantClick === ".quant99") {
             var attachCustomQuant = $(this).attr(".quant99");
             var getCustomQuant = $.get(attachCustomQuant);
-            var quantCustom = prompt("Change Quant", getCustomQuant.quantClick);
+            var quantCustom = document.getElementById('quantCustomInput').value
             if (quantCustom === null){
                     return
                 }
@@ -364,9 +375,13 @@ var franchiseConstructor = function() {
                         nounConstructor();
                     }
                     var franchiseClass = "franchise" + nounKeyClass;
+                    if (nounKeyClass === 'custom') {
+                        $('.franchiseDiv').append($('<input id="franchiseCustomInput">'))
+                        .append($('<input type="button" value="click" class="franchise' + nounKeyClass + '">'))
+                    } else {
                     $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
-
+            }
             }
 
         }
@@ -386,11 +401,10 @@ var franchiseConstructor = function() {
             var franchiseClick = ".franchise" + nounKeyClass;
 
             $(franchiseClick).one('click',function() {
-
             if (franchiseClick === ".franchisecustom") {
             var attachCustomFranchise = $(this).attr(".franchisecustom");
             var getCustomFranchise = $.get(attachCustomFranchise);
-            var franchiseCustom = prompt("Change franchise", getCustomFranchise.franchiseClick);
+            var franchiseCustom = document.getElementById('franchiseCustomInput').value
             if (franchiseCustom === null){
                     return
                 }
@@ -449,7 +463,6 @@ var nounConstructor = function() {
                 $('.nounDiv').append($('<input id="nounCustomInput">'))
                 .append($('<input type="button" value="click" class="noun99">'))
             }
-//*******
         }
 
         if (keyName === "anyLocation") {
@@ -540,7 +553,12 @@ var rewardConstructor = function() {
     var rewardCombined = rewardPhrases.combined;
     for (var keyName in rewardCombined) {
         var rewardClass = "reward" + keyName;
+            if (keyName === '99') {
+                $('.rewardDiv').append($('<input id="rewardCustomInput">'))
+                .append($('<input type="button" value="click" class="reward' + keyName + '">'))
+            } else {
         $('.rewardDiv').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
+        }
     }
 
     $('#rewardBack').one('click',function () {
@@ -559,7 +577,7 @@ var rewardConstructor = function() {
             if (rewardClick === ".reward99") {
             var attachCustomReward = $(this).attr(".reward99");
             var getCustomReward = $.get(attachCustomReward);
-            var rewardCustom = prompt("Change Reward", getCustomReward.rewardClick);
+            var rewardCustom = document.getElementById('rewardCustomInput').value
             if (rewardCustom === null){
                     return
                 }
@@ -599,7 +617,12 @@ var timeConstructor = function() {
 
     for (var keyName in timePhrases) {
         var timeClass = "time" + keyName;
+            if (keyName === '99') {
+                $('.timeDiv').append($('<input id="timeCustomInput">'))
+                .append($('<input type="button" value="click" class="time' + keyName + '">'))
+            } else {
         $('.timeDiv').append($('<p>').text(timePhrases[keyName]).addClass(timeClass))
+        }
     }
 
     $('#timeBack').one('click',function() {
@@ -619,7 +642,7 @@ var timeConstructor = function() {
             if (timeClick === ".time99") {
             var attachCustomTime = $(this).attr(".time99");
             var getCustomTime = $.get(attachCustomTime);
-            var timeCustom = prompt("Change Reward", getCustomTime.timeClick);
+            var timeCustom = document.getElementById('timeCustomInput').value
             if (timeCustom === null){
                     return
                 }
