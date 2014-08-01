@@ -168,51 +168,57 @@ var startChallengeCreation = function(){
 
 var startConstructor = function (startPhrases) {
         clearDivs();
-    $('#startBuild').show();
+        $('#startBuild').show();
 
-    $('#startBuild').append($('<div>').addClass('startDiv'))
-    $('.startDiv').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
+        $('#startBuild').append($('<div>').addClass('startDiv'))
+        $('.startDiv').append($('<p>').text('Choose a Starting Phrase').addClass('question'))
 
-    for (var keyName in startPhrases) {
-        var startClass = "start" + keyName;
-        $('.startDiv').append($('<p>').text(startPhrases[keyName]).addClass(startClass))
-    }
+        for (var keyName in startPhrases) {
+            var startClass = "start" + keyName;
+            if (keyName === '99') {
+                console.log(keyName);
+                $('.startDiv').append($('<input id="startCustomInput">'))
+                .append($('<input type="button" value="click" class="start' + keyName + '">'))
+            } else {
 
-    var attachHandler = function(keyName) {
-        var startClick = ".start" + keyName;
-        $(startClick).click(function () {
-            if (startClick === ".start99") {
-            var attachCustomStart = $(this).attr(".start99");
-            var getCustomStart = $.get(attachCustomStart);
-            var startCustom = prompt("Change Start", getCustomStart.startclick);
-            if (startCustom === null){
-                    return
-                }
-            tempStart = startCustom + " ";
-            newContractArray.push(tempStart);
-            newContract = newContract + tempStart
+            $('.startDiv').append($('<p>').text(startPhrases[keyName]).addClass(startClass))
+             }
+       }
+
+        var attachHandler = function(keyName) {
+            var startClick = ".start" + keyName;
+            $(startClick).click(function () {
+                if (startClick === ".start99") {
+                    var attachCustomStart = $(this).attr(".start99");
+                    var getCustomStart = $.get(attachCustomStart);
+                    var startCustom = document.getElementById('startCustomInput').value
+                    if (startCustom === null){
+                        return
+                    }
+                    tempStart = startCustom + " ";
+                    newContractArray.push(tempStart);
+                    newContract = newContract + tempStart
             // clearDivs();
             $('#startBuild').hide();
             $('#verbBuild').show();
             $('.back').show();
             verbConstructor();
             return;
-            }
-            tempStart = startPhrases[keyName];
-            newContractArray.push(tempStart);
-            newContract = newContract + tempStart
+        }
+        tempStart = startPhrases[keyName];
+        newContractArray.push(tempStart);
+        newContract = newContract + tempStart
             // clearDivs();
             $('#startBuild').hide();
             $('#verbBuild').show();
             $('.back').show();
             verbConstructor();
-            });
+        });
         }
-
         for (var keyName in startPhrases) {
             attachHandler(keyName);
+          }
         }
-    }
 
 var verbConstructor = function() {
     clearDivs();
@@ -439,10 +445,11 @@ var nounConstructor = function() {
             }
             if (keyName === "custom") {
                 var putItHere = nouns[keyName];
-                    $('.nounDiv').append($('<p>').text(putItHere[99]).addClass('noun99'))
 
+                $('.nounDiv').append($('<input id="nounCustomInput">'))
+                .append($('<input type="button" value="click" class="noun99">'))
             }
-
+//*******
         }
 
         if (keyName === "anyLocation") {
@@ -491,7 +498,8 @@ var nounConstructor = function() {
 
             var attachCustomNoun = $(this).attr(".noun99");
             var getCustomNoun = $.get(attachCustomNoun);
-            var nounCustom = prompt("Change Noun", getCustomNoun.nounClick);
+            var nounCustom = document.getElementById('nounCustomInput').value
+            //var nounCustom = prompt("Change Noun", getCustomNoun.nounClick);
             if (nounCustom === null){
                     return
                 }
@@ -715,8 +723,7 @@ var sendConstructor = function() {
     console.log(response);
     initApp();
     startFriendSelector();
-});
-
+     });
     }
 
 var buildContractFormat = function(CA) {
@@ -725,7 +732,7 @@ var buildContractFormat = function(CA) {
             output = output + CA[i];
         }
         return output;
-    }
+        }
 
 var clearDivs = function () {
     $('.startDiv').remove();
