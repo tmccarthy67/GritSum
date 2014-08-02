@@ -177,7 +177,7 @@ var startConstructor = function (startPhrases) {
             var startClass = "start" + keyName;
             if (keyName === '99') {
                 $('.startDiv').append($('<input id="startCustomInput" placeholder="Start phrase...">'))
-                .append($('<input type="button" value="click" class="start' + keyName + '">'))
+//                .append($('<input type="button" value="click" class="start' + keyName + '">'))
             } else {
 
             $('.startDiv').append($('<p>').text(startPhrases[keyName]).addClass(startClass))
@@ -235,7 +235,7 @@ var verbConstructor = function() {
             var verbClass = "verb" + keyName;
             if (keyName === '99') {
                 $('.verbDiv').append($('<input id="verbCustomInput" placeholder="Verb ...">'))
-                .append($('<input type="button" value="click" class="verb' + keyName + '">'))
+//                .append($('<input type="button" value="click" class="verb' + keyName + '">'))
             } else {
 
             $('.verbDiv').append($('<p>').text(verbPhrases[keyName]).addClass(verbClass))
@@ -305,7 +305,7 @@ var quantConstructor = function() {
             var verbClass = "verb" + keyName;
             if (keyName === '99') {
                 $('.quantDiv').append($('<input id="quantCustomInput" placeholder="Quantity...">'))
-                .append($('<input type="button" value="click" class="quant' + keyName + '">'))
+//                .append($('<input type="button" value="click" class="quant' + keyName + '">'))
             } else {
             $('.quantDiv').append($('<p>').text(quantPhrases[keyName]).addClass(quantClass))
             }
@@ -385,7 +385,7 @@ var franchiseConstructor = function() {
                     var franchiseClass = "franchise" + nounKeyClass;
                     if (nounKeyClass === 'custom') {
                         $('.franchiseDiv').append($('<input id="franchiseCustomInput" placeholder="Franchise...">'))
-                        .append($('<input type="button" value="click" class="franchise' + nounKeyClass + '">'))
+//                        .append($('<input type="button" value="click" class="franchise' + nounKeyClass + '">'))
                     } else {
                     $('.franchiseDiv').append($('<p>').text(nounKey).addClass(franchiseClass))
                 }
@@ -470,7 +470,7 @@ var nounConstructor = function() {
                 var putItHere = nouns[keyName];
 
                 $('.nounDiv').append($('<input id="nounCustomInput" placeholder="Noun...">'))
-                .append($('<input type="button" value="click" class="noun99">'))
+//                .append($('<input type="button" value="click" class="noun99">'))
             }
 
             if (keyName === "anyLocation") {
@@ -482,7 +482,7 @@ var nounConstructor = function() {
 
                         if (nounClass === "noun99") {
                 $('.nounDiv').append($('<input id="nounCustomInput" placeholder="Noun...">'))
-                .append($('<input type="button" value="click" class="noun99">'))
+//                .append($('<input type="button" value="click" class="noun99">'))
 
                         } else {
                         console.log(keySharp);
@@ -596,7 +596,7 @@ var rewardConstructor = function() {
         var rewardClass = "reward" + keyName;
             if (keyName === '99') {
                 $('.rewardDiv').append($('<input id="rewardCustomInput"  placeholder="Reward...">'))
-                .append($('<input type="button" value="click" class="reward' + keyName + '">'))
+//                .append($('<input type="button" value="click" class="reward' + keyName + '">'))
             } else {
         $('.rewardDiv').append($('<p>').text(rewardPhrases.combined[keyName]).addClass(rewardClass))
         }
@@ -663,7 +663,7 @@ var timeConstructor = function() {
         var timeClass = "time" + keyName;
             if (keyName === '99') {
                 $('.timeDiv').append($('<input id="timeCustomInput"  placeholder="When...">'))
-                .append($('<input type="button" value="click" class="time' + keyName + '">'))
+//                .append($('<input type="button" value="click" class="time' + keyName + '">'))
             } else {
         $('.timeDiv').append($('<p>').text(timePhrases[keyName]).addClass(timeClass))
         }
