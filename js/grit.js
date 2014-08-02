@@ -475,10 +475,19 @@ var nounConstructor = function() {
 
             if (keyName === "anyLocation") {
                for (var nounKey in nouns) {
+                console.log(nounKey);
                     var nounList = nouns[nounKey];
                     for (var keySharp in nounList) {
                         var nounClass = "noun" + keySharp;
+
+                        if (nounClass === "noun99") {
+                $('.nounDiv').append($('<input id="nounCustomInput" placeholder="Noun...">'))
+                .append($('<input type="button" value="click" class="noun99">'))
+
+                        } else {
+                        console.log(keySharp);
                         $('.nounDiv').append($('<p>').text(nounList[keySharp]).addClass(nounClass))
+                        }
                     }
                 }
             }
